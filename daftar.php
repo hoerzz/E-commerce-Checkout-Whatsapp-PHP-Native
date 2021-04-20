@@ -199,7 +199,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['register'])) {
 							<input id="input_name" class="form_input input_name input_ph" type="email" name="email" placeholder="Enter Email" required="required" data-error="Name is required.">
 
                             <input id="input_name" class="form_input input_name input_ph" type="password" name="password" placeholder="Enter Password" required="required" data-error="Name is required.">
-
+                            <label>Gunakan Kode Negara Cth :62xxxxx</label>
                             <input id="input_name" class="form_input input_name input_ph" type="number" name="mobile" placeholder="No. Wa Aktif" required="required" data-error="Name is required.">
 
                             <textarea id="input_message" class="input_ph input_message" name="address"  placeholder="Alamat" rows="3" required data-error="Please, write us a message."></textarea>

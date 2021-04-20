@@ -284,7 +284,7 @@ if (isset($_GET['id'])) {
 							<input name="npembeli" id="wa_name" class="form_input input_email input_ph" type="text" placeholder="Nama" required="required" data-error="Valid email is required.">
 
 							<input name="no_pembeli" id="wa_email" class="form_input input_name input_ph" type="number" placeholder="No.Wa Aktif" required="required" data-error="Name is required.">
-							<label>Tambahkan Kode Nomor Negara Ex. 62xxxxx</label>
+							<label>Tambahkan Kode Nomor Negara Cth : 62xxxxx</label>
 
 							<input name="jumlah" id="jumlah" class="form_input input_email input_ph" type="number" placeholder="Jumlah Beli" required="required" data-error="Valid email is required.">
 							

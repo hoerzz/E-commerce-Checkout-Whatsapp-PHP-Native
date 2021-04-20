@@ -60,6 +60,17 @@ $stmt = $db->pdo->query($sql);
 $countproduk = $stmt->fetchColumn();
  ?>
           <div class="row">
+          <div class="col-12 mb-4">
+                <div class="hero text-white hero-bg-image hero-bg-parallax" data-background="https://th.bing.com/th/id/R80eadb38292891deec853ccbc7cb789b?rik=HMEbnzrFe81ITg&riu=http%3a%2f%2fblogs.ubc.ca%2fcham93%2ffiles%2f2013%2f10%2fyoung-women-girls-shopping-81.jpg&ehk=8uSdJeoYoEu6Lmf6iUvjUtbbZjrecl7sbD0wTdYGQMM%3d&risl=&pid=ImgRaw">
+                  <div class="hero-inner">
+                    <h2>Welcome, <?php $username = Session::get('username');if (isset($username)) {echo $username;}?></h2>
+                    <p class="lead">Selamat Bergabung Di Zyrushshop</p>
+                    <div class="mt-4">
+                      <a href="profile.php?id=<?php echo Session::get("id"); ?>" class="btn btn-outline-white btn-lg btn-icon icon-left"><i class="far fa-user"></i> Setup Account</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
           <div class="col-lg-4 col-md-4 col-sm-12">
               <div class="card card-statistic-2">
                 <!-- <div class="card-stats">

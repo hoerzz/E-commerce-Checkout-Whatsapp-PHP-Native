@@ -11,6 +11,14 @@ Session::CheckSession();
           <div class="section-body">
         <div class="card-body">
 
+        <div class="alert alert-light alert-has-icon">
+                      <div class="alert-icon"><i class="far fa-lightbulb"></i></div>
+                      <div class="alert-body">
+                        <div class="alert-title">Pemberitahuan</div>
+                        Jika Nomer Pembeli Tidak Sesuai Maka tidak bisa diberitahu
+                      </div>
+                    </div>
+
         <?php
           if (isset($_GET['id'])) {
             $userid = preg_replace('/[^a-zA-Z0-9-]/', '', (int)$_GET['id']);
@@ -51,8 +59,10 @@ Session::CheckSession();
                         </label>
                       </div>
                     </div>
-                    <input name="update" id="send_form" class="btn btn-success" href="javascript:void" type="submit" title="UPDATE" value="UPDATE"></input>
+                    <input name="update" class="btn btn-primary" type="submit" title="UPDATE" value="UPDATE"></input>
+                    <input id="send_form" class="btn btn-success" href="javascript:void" type="submit" title="UPDATE" value="BERITAHU DI WHATSAPP"></input>
                 </form>
+                
 
                 <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
 	<script type="text/javascript">
@@ -98,4 +108,8 @@ document.getElementById("text-info").innerHTML = '<span class="no">'+text_no+'</
 }
 });
 </script>
+<?php
+  include 'inc/footer.php';
+
+  ?>
 <?php } ?>
