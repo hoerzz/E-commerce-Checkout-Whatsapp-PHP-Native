@@ -70,16 +70,15 @@ if (isset($_GET['action']) && $_GET['action'] == 'logout') {
           <ul class="navbar-nav">
           <?php if (Session::get('id') == TRUE) { ?>
             <?php if (Session::get('roleid') == '1') { ?>
-                <li class="nav-item"><a href="dashboard.php" class="nav-link"><i class="fas fa-fire"></i><span> Dashboard</span></a></li>
-                <li class="nav-item"><a href="userlist.php" class="nav-link"><i class="fas fa-user-alt"></i> <span> User List</span></a></li>
-                <li class="nav-item"><a href="vieworder.php" class="nav-link"><i class="fas fa-clipboard-list"></i> <span> Order</span></a></li>
-              
+              <li class="nav-item"><a href="report_order.php" class="nav-link"><i class="fas fa-file-pdf"></i> <span>Download Laporan Order</span></a></li>
+              <li class="nav-item"><a href="report_product.php" class="nav-link"><i class="fas fa-file-pdf"></i> <span>Download Laporan Product</span></a></li>
+              <li class="nav-item"><a href="report_akun.php" class="nav-link"><i class="fas fa-file-pdf"></i> <span>Download Laporan Akun</span></a></li>
               <?php  } ?>
               <?php } ?>
           <?php if (Session::get('id') == TRUE) { ?>
             <?php if (Session::get('roleid') == '2') { ?>
-                <li class="nav-item"><a href="dashboard.php" class="nav-link"><i class="fas fa-fire"></i><span> Dashboard</span></a></li>
-                <li class="nav-item"><a href="vieworder.php" class="nav-link"><i class="fas fa-clipboard-list"></i> <span> Order</span></a></li>
+              <li class="nav-item"><a href="report_order.php" class="nav-link"><i class="fas fa-file-pdf"></i> <span>Download Laporan Order</span></a></li>
+              <li class="nav-item"><a href="report_product.php" class="nav-link"><i class="fas fa-file-pdf"></i> <span>Download Laporan Product</span></a></li>
             <?php  } ?>
           <?php }?>
           </ul>
@@ -101,7 +100,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'logout') {
     if ($getUinfo) {
      ?>
           <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-          <?php echo '<img src=image/restaurant/',$getUinfo->email,'/',$getUinfo->fld_logo,' class="rounded-circle mr-1" >'; ?>
+          <?php echo '<img src=',$getUinfo->fld_logo,' class="rounded-circle mr-1" >'; ?>
             <div class="d-sm-none d-lg-inline-block">Hi, <?php $username = Session::get('username'); if (isset($username)) { echo $username; } ?></div></a>
 
             <?php } ?>
@@ -141,7 +140,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'logout') {
                 <li class="nav-item"><a href="dashboard.php" class="nav-link"><i class="fas fa-fire"></i><span>Dashboard</span></a></li>
                 <li class="nav-item"><a href="userlist.php" class="nav-link"><i class="fas fa-user-alt"></i> <span>User List</span></a></li>
                 <li class="nav-item"><a href="vieworder.php" class="nav-link"><i class="fas fa-clipboard-list"></i> <span>Order</span></a></li>
-                <li class="nav-item"><a href="addVendorPdo.php" class="nav-link"><i class="fas fa-user-plus"></i> <span>Add Vendor</span></a></li>
+                <li class="nav-item"><a href="addUser.php" class="nav-link"><i class="fas fa-user-plus"></i> <span>Add User</span></a></li>
                 <li class="nav-item"><a href="addProduct.php" class="nav-link"><i class="fas fa-shopping-cart"></i> <span>Add Product</span></a></li>
                 <li class="nav-item"><a href="addCategory.php" class="nav-link"><i class="fas fa-list-alt"></i> <span>Add Category</span></a></li>
               

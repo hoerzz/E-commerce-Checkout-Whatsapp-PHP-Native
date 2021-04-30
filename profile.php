@@ -56,7 +56,7 @@ if (isset($username)) {
               <div class="col-12 col-md-12 col-lg-5">
                 <div class="card profile-widget">
                   <div class="profile-widget-header">
-                  <?php echo '<img src=image/restaurant/',$getUinfo->email,'/',$getUinfo->fld_logo,' class="rounded-circle profile-widget-picture" height="100" width="100" >'; ?>
+                  <?php echo '<img src=',$getUinfo->fld_logo,' class="rounded-circle profile-widget-picture" height="100" width="100" >'; ?>
                     <div class="profile-widget-items">
                       <div class="profile-widget-item">
                       <div class="profile-widget-item-label">Nama</div>
@@ -127,6 +127,7 @@ if (isset($username)) {
                     <input type="text" id="mobile" name="address" value="<?php echo $getUinfo->fld_address; ?>" class="form-control">
                   </div>
                   </div>
+                  
                   <?php if (Session::get("roleid") == '1') { ?>
 
                   <div class="form-group
@@ -158,13 +159,12 @@ if (isset($username)) {
 
 
                       </select>
-                    </div>
+                      </div>
                   </div>
-
+                  
               <?php }else{?>
                 <input type="hidden" name="roleid" value="<?php echo $getUinfo->roleid; ?>">
               <?php } ?>
-
                   <?php if (Session::get("id") == $getUinfo->id) {?>
 
                     <div class="card-footer text-left">

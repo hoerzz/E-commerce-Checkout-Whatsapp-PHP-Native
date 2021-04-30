@@ -207,7 +207,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['register'])) {
                             <input type="hidden" name="roleid" value="2" class="form-control">
 
                             Upload Logo
-                            <input id="input_message" class="input_ph input_message" type="file"  name="logo" required>
+                            <input id="input_message" class="input_ph input_message" type="file"  name="usr_img" required>
 
                             <br><br>
 						</div>

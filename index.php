@@ -228,7 +228,7 @@ $users = new Users();
 						<div class="product-item <?php echo $value->kategori; ?>">
 							<div class="product discount product_filter">
 								<div class="product_image">
-								<?php echo '<img src=image/restaurant/foodimages/',$value->fldimage,' height="235" width="235" >'; ?>
+								<?php echo '<img src=',$value->fldimage,' height="235" width="235" >'; ?>
 								</div>
 								<div class="favorite favorite_left"></div>
 								<div class="product_info">
@@ -278,7 +278,7 @@ $users = new Users();
 								<div class="product-item">
 									<div class="product discount">
 										<div class="product_image">
-											<?php echo '<img src=image/restaurant/foodimages/',$value->fldimage,' height="235" width="235" >'; ?>
+											<?php echo '<img src=',$value->fldimage,' height="235" width="235" >'; ?>
 										</div>
 										<div class="favorite favorite_left"></div>
 										<div class="product_info">

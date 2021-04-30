@@ -37,8 +37,11 @@ Session::CheckSession();
                             <input type="number" class="form-control" id="cost"  placeholder="Harga" name="harga" required>
                     </div>
 							 				 
-	                <div class="form-group">
-                            <textarea rows = "6" cols = "50" id="cuisines" placeholder="Deskripsi Produk" name="deskripsi"></textarea>
+	                <div class="form-group row">
+                            <label class="col-md-1 text-md-left text-right mt-2">Deskripsi</label>
+                          <div class="col-lg-12 col-md-6">
+                            <textarea rows="10" class="form-control" name="deskripsi"></textarea>
+                          </div>
                     </div>
                     <div class="form-group">
                       <label>Category</label>
@@ -62,7 +65,7 @@ Session::CheckSession();
                       <div class="col-sm-12 col-md-7">
                         <div id="image-preview" class="image-preview">
                           <label for="image-upload" id="image-label">Choose File</label>
-                          <input type="file" id="files" accept="image/*" name="food_pic" required/>
+                          <input type="file" id="files" accept="image/*" name="prod_img" required/>
                           <img id="image" height="256" width="256"/>
                         </div>
                         <br><br>
@@ -70,6 +73,7 @@ Session::CheckSession();
                       </div>
                     </div>	
                             <button type="submit" name="add" class="btn btn-primary">Tambah Produk</button>
+                            
                 </form>
 				   
             </div>

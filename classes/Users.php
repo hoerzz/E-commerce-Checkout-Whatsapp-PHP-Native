@@ -46,7 +46,8 @@ class Users{
     $roleid = $data['roleid'];
     $password = $data['password'];
     $address = $data['address'];
-    $logo=$_FILES['logo']['name'];
+    $photo=$_FILES['usr_img']['name'];
+    $upload="image/akunimage/".$photo;
 
     $checkEmail = $this->checkExistEmail($email);
 
@@ -80,21 +81,20 @@ class Users{
       $stmt->bindValue(':mobile', $mobile);
       $stmt->bindValue(':roleid', $roleid);
       $stmt->bindValue(':address', $address);
-      $stmt->bindValue(':logo', $logo);
+      $stmt->bindValue(':logo', $upload);
       $result = $stmt->execute();
       if ($result) {
-        mkdir("image/restaurant/$email");
-        move_uploaded_file($_FILES['logo']['tmp_name'],"image/restaurant/$email/".$_FILES['logo']['name']);
+        move_uploaded_file($_FILES['usr_img']['tmp_name'], $upload);
 
           echo "<script>location.href='dashboard.php';</script>";
         $msg = '<div class="alert alert-success alert-dismissible mt-3" id="flash-msg">
   <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-  <strong>Success !</strong> Wow, you have Registered Successfully !</div>';
+  <strong>Success !</strong> Anda Berhasil Mendaftar !</div>';
           return $msg;
       }else{
         $msg = '<div class="alert alert-danger alert-dismissible mt-3" id="flash-msg">
   <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-  <strong>Error !</strong> Something went Wrong !</div>';
+  <strong>Error !</strong> Ada yang salah !</div>';
           return $msg;
       }
       $_SESSION['id']=$email;
@@ -170,12 +170,12 @@ class Users{
       if ($result) {
         $msg = '<div class="alert alert-success alert-dismissible mt-3" id="flash-msg">
   <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-  <strong>Success !</strong> Wow, you have Registered Successfully !</div>';
+  <strong>Success !</strong> Anda Berhasil Mendaftar !</div>';
           return $msg;
       }else{
         $msg = '<div class="alert alert-danger alert-dismissible mt-3" id="flash-msg">
   <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-  <strong>Error !</strong> Something went Wrong !</div>';
+  <strong>Error !</strong> Ada yang salah !</div>';
           return $msg;
       }
 
@@ -234,18 +234,18 @@ class Users{
       if ($email == "" || $password == "" ) {
         $msg = '<div class="alert alert-danger alert-dismissible mt-3" id="flash-msg">
   <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-  <strong>Error !</strong> Email or Password not be Empty !</div>';
+  <strong>Error !</strong> Email atau Kata Sandi tidak boleh Kosong !</div>';
           return $msg;
 
       }elseif (filter_var($email, FILTER_VALIDATE_EMAIL === FALSE)) {
         $msg = '<div class="alert alert-danger alert-dismissible mt-3" id="flash-msg">
   <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-  <strong>Error !</strong> Invalid email address !</div>';
+  <strong>Error !</strong> Alamat email salah !</div>';
           return $msg;
       }elseif ($checkEmail == FALSE) {
         $msg = '<div class="alert alert-danger alert-dismissible mt-3" id="flash-msg">
   <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-  <strong>Error !</strong> Email did not Found, use Register email or password please !</div>';
+  <strong>Error !</strong> Email tidak ditemukan, gunakan daftar email atau kata sandi!</div>';
           return $msg;
       }else{
 
@@ -256,7 +256,7 @@ class Users{
         if ($chkActive == TRUE) {
           $msg = '<div class="alert alert-danger alert-dismissible mt-3" id="flash-msg">
     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-    <strong>Error !</strong> Sorry, Your account is Diactivated, Contact with Admin !</div>';
+    <strong>Error !</strong>Maaf, Akun Anda Dinonaktifkan, Silahkan Hubungi Admin!</div>';
             return $msg;
         }elseif ($logResult) {
 
@@ -272,7 +272,7 @@ class Users{
         }else{
           $msg = '<div class="alert alert-danger alert-dismissible mt-3" id="flash-msg">
     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-    <strong>Error !</strong> Email or Password did not Matched !</div>';
+    <strong>Error !</strong> Email atau Kata Sandi Tidak Cocok!</div>';
             return $msg;
         }
 
@@ -307,32 +307,26 @@ class Users{
       $username = $data['username'];
       $email = $data['email'];
       $mobile = $data['mobile'];
-      $roleid = $data['roleid'];
       $address = $data['address'];
+      $roleid = $data['roleid'];
 
+      
 
 
       if ($username == ""|| $email == "" || $mobile == ""  ) {
         $msg = '<div class="alert alert-danger alert-dismissible mt-3" id="flash-msg">
   <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-  <strong>Error !</strong> Input Fields must not be Empty !</div>';
+  <strong>Error !</strong> Kolom tidak boleh Kosong!</div>';
           return $msg;
         }elseif (strlen($username) < 3) {
           $msg = '<div class="alert alert-danger alert-dismissible mt-3" id="flash-msg">
     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-    <strong>Error !</strong> Username is too short, at least 3 Characters !</div>';
+    <strong>Error !</strong> Nama pengguna terlalu pendek, minimal 3 Karakter!</div>';
             return $msg;
-        }elseif (filter_var($mobile,FILTER_SANITIZE_NUMBER_INT) == FALSE) {
-          $msg = '<div class="alert alert-danger alert-dismissible mt-3" id="flash-msg">
-    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-    <strong>Error !</strong> Enter only Number Characters for Mobile number field !</div>';
-            return $msg;
-
-
-      }elseif (filter_var($email, FILTER_VALIDATE_EMAIL === FALSE)) {
+        }elseif (filter_var($email, FILTER_VALIDATE_EMAIL === FALSE)) {
         $msg = '<div class="alert alert-danger alert-dismissible mt-3" id="flash-msg">
   <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-  <strong>Error !</strong> Invalid email address !</div>';
+  <strong>Error !</strong> Alamat email salah !</div>';
           return $msg;
       }else{
 
@@ -350,13 +344,13 @@ class Users{
           $stmt->bindValue(':address', $address);
           $stmt->bindValue(':roleid', $roleid);
           $stmt->bindValue(':id', $userid);
-        $result =   $stmt->execute();
+          $result =  $stmt->execute();
 
         if ($result) {
           echo "<script>location.href='dashboard.php';</script>";
           Session::set('msg', '<div class="alert alert-success alert-dismissible mt-3" id="flash-msg">
           <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-          <strong>Success !</strong> Wow, Your Information updated Successfully !</div>');
+          <strong>Success !</strong> Informasi Anda Berhasil Diperbarui!</div>');
 
 
 
@@ -364,7 +358,7 @@ class Users{
           echo "<script>location.href='dashboard.php';</script>";
           Session::set('msg', '<div class="alert alert-danger alert-dismissible mt-3" id="flash-msg">
     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-    <strong>Error !</strong> Data not inserted !</div>');
+    <strong>Error !</strong> Data tidak dimasukkan!</div>');
 
 
         }
@@ -380,19 +374,26 @@ class Users{
 
     // Delete User by Id Method
     public function deleteUserById($remove){
+      $sql = "SELECT fld_logo FROM tbl_users WHERE id = :id";
+      $stmt = $this->db->pdo->prepare($sql);
+      $stmt->bindValue(':id', $remove);
+      $stmt->execute();
+      $result = $stmt->fetch();
+      unlink($result ["fld_logo"]);
+
       $sql = "DELETE FROM tbl_users WHERE id = :id ";
       $stmt = $this->db->pdo->prepare($sql);
       $stmt->bindValue(':id', $remove);
         $result =$stmt->execute();
         if ($result) {
-          $msg = '<div class="alert alert-success alert-dismissible mt-3" id="flash-msg">
-    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-    <strong>Success !</strong> User account Deleted Successfully !</div>';
-            return $msg;
+          header('Location:dashboard.php');
+          Session::set('msg', '<div class="alert alert-success alert-dismissible mt-3" id="flash-msg">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          <strong>Success !</strong> Akun Berhasil Dihapus !</div>');
         }else{
           $msg = '<div class="alert alert-danger alert-dismissible mt-3" id="flash-msg">
     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-    <strong>Error !</strong> Data not Deleted !</div>';
+    <strong>Error !</strong> Data tidak Dihapus!</div>';
             return $msg;
         }
     }
@@ -412,13 +413,13 @@ class Users{
           echo "<script>location.href='dashboard.php';</script>";
           Session::set('msg', '<div class="alert alert-success alert-dismissible mt-3" id="flash-msg">
           <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-          <strong>Success !</strong> User account Diactivated Successfully !</div>');
+          <strong>Success !</strong> Akun Berhasil Dinonaktifkan !</div>');
 
         }else{
           echo "<script>location.href='dashboard.php';</script>";
           Session::set('msg', '<div class="alert alert-danger alert-dismissible mt-3" id="flash-msg">
     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-    <strong>Error !</strong> Data not Diactivated !</div>');
+    <strong>Error !</strong> Data tidak Dinonaktifkan !</div>');
 
             return $msg;
         }
@@ -439,12 +440,12 @@ class Users{
           echo "<script>location.href='dashboard.php';</script>";
           Session::set('msg', '<div class="alert alert-success alert-dismissible mt-3" id="flash-msg">
           <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-          <strong>Success !</strong> User account activated Successfully !</div>');
+          <strong>Success !</strong> Akun diaktifkan dengan sukses !</div>');
         }else{
           echo "<script>location.href='dashboard.php';</script>";
           Session::set('msg', '<div class="alert alert-danger alert-dismissible mt-3" id="flash-msg">
     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-    <strong>Error !</strong> Data not activated !</div>');
+    <strong>Error !</strong> Data tidak diaktifkan !</div>');
         }
     }
 
@@ -478,12 +479,12 @@ class Users{
       if ($old_pass == "" || $new_pass == "" ) {
         $msg = '<div class="alert alert-danger alert-dismissible mt-3" id="flash-msg">
   <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-  <strong>Error !</strong> Password field must not be Empty !</div>';
+  <strong>Error !</strong> kata sandi tidak boleh Kosong !</div>';
           return $msg;
       }elseif (strlen($new_pass) < 6) {
         $msg = '<div class="alert alert-danger alert-dismissible mt-3" id="flash-msg">
   <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-  <strong>Error !</strong> New password must be at least 6 character !</div>';
+  <strong>Error !</strong> Kata sandi baru minimal harus 6 karakter !</div>';
           return $msg;
        }
 
@@ -491,7 +492,7 @@ class Users{
          if ($oldPass == FALSE) {
            $msg = '<div class="alert alert-danger alert-dismissible mt-3" id="flash-msg">
      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-     <strong>Error !</strong> Old password did not Matched !</div>';
+     <strong>Error !</strong> Kata sandi lama tidak cocok !</div>';
              return $msg;
          }else{
            $new_pass = SHA1($new_pass);
@@ -509,12 +510,12 @@ class Users{
             echo "<script>location.href='dashboard.php';</script>";
             Session::set('msg', '<div class="alert alert-success alert-dismissible mt-3" id="flash-msg">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            <strong>Success !</strong> Great news, Password Changed successfully !</div>');
+            <strong>Success !</strong> Kata sandi berhasil diubah !</div>');
 
           }else{
             $msg = '<div class="alert alert-danger alert-dismissible mt-3" id="flash-msg">
       <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-      <strong>Error !</strong> Password did not changed !</div>';
+      <strong>Error !</strong> Kata sandi tidak berubah !</div>';
               return $msg;
           }
 
@@ -524,6 +525,75 @@ class Users{
 
     }
 
+    public function deleteProdukById($remove_produk){
+      $sql = "SELECT fldimage FROM tbl_produk WHERE product_id = :product_id";
+      $stmt = $this->db->pdo->prepare($sql);
+      $stmt->bindValue(':product_id', $remove_produk);
+      $stmt->execute();
+      $result = $stmt->fetch();
+      unlink($result ["fldimage"]);
+
+      $sql = "DELETE FROM tbl_produk WHERE product_id = :product_id ";
+      $stmt = $this->db->pdo->prepare($sql);
+      $stmt->bindValue(':product_id', $remove_produk);
+        $result =$stmt->execute();
+        if ($result) {
+          $msg = '<div class="alert alert-success alert-dismissible mt-3" id="flash-msg">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>Produk !</strong> Berhasil Dihapus</div>';
+            return $msg;
+        }else{
+          $msg = '<div class="alert alert-danger alert-dismissible mt-3" id="flash-msg">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>Error !</strong> Data tidak Dihapus !</div>';
+            return $msg;
+        }
+    }
+
+    public function UpdateProduct($product_id, $data){
+      $namaproduk = $data['namaproduk'];
+      $harga = $data['harga'];
+      $deskripsi = $data['deskripsi'];
+      $kategori = $data['kategori'];
+      $oldimage=$_POST['oldimage'];
+
+      if(isset($_FILES['image']['name'])&&($_FILES['image']['name']!="")){
+        $newimage="image/produk/produkimage/".$_FILES['image']['name'];
+        unlink($oldimage);
+        move_uploaded_file($_FILES['image']['tmp_name'], $newimage);
+      }
+      else{
+        $newimage=$oldimage;
+      }
+
+      $sql = "UPDATE tbl_produk SET
+      namaproduk = :namaproduk,
+      harga = :harga,
+      deskripsi = :deskripsi,
+      kategori = :kategori,
+      fldimage = :fldimage
+      WHERE product_id = :product_id";
+      $stmt = $this->db->pdo->prepare($sql);
+      $stmt->bindValue(':namaproduk', $namaproduk);
+      $stmt->bindValue(':harga', ($harga));
+      $stmt->bindValue(':deskripsi', $deskripsi);
+      $stmt->bindValue(':kategori', $kategori);
+      $stmt->bindValue(':fldimage', $newimage,PDO::PARAM_STR);
+      $stmt->bindValue(':product_id', $product_id);
+      $result = $stmt->execute();
+      if ($result) {
+        echo "<script>location.href='dashboard.php';</script>";
+          Session::set('msg', '<div class="alert alert-success alert-dismissible mt-3" id="flash-msg">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          <strong>Product !</strong> Berhasil Diupdate</div>');
+      }else{
+        $msg = '<div class="alert alert-danger alert-dismissible mt-3" id="flash-msg">
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  <strong>Error !</strong> Ada yang salah !</div>';
+          return $msg;
+      }
+    }
+
     public function AddProduct($data){
       $penjual = $data['penjual'];
       $notlp = $data['notlp'];
@@ -531,7 +601,8 @@ class Users{
       $harga = $data['harga'];
       $deskripsi = $data['deskripsi'];
       $kategori = $data['kategori'];
-      $img_name=$_FILES['food_pic']['name'];
+      $photo=$_FILES['prod_img']['name'];
+	    $upload="image/produk/produkimage/".$photo;
 
       $sql = "INSERT INTO tbl_produk(penjual,notlp,namaproduk,harga,deskripsi,kategori,fldimage) VALUES (:penjual, :notlp, :namaproduk, :harga, :deskripsi, :kategori, :fldimage)";
       $stmt = $this->db->pdo->prepare($sql);
@@ -541,10 +612,10 @@ class Users{
       $stmt->bindValue(':harga', ($harga));
       $stmt->bindValue(':deskripsi', $deskripsi);
       $stmt->bindValue(':kategori', $kategori);
-      $stmt->bindValue(':fldimage', $img_name);
+      $stmt->bindValue(':fldimage', $upload);
       $result = $stmt->execute();
       if ($result) {
-        move_uploaded_file($_FILES['food_pic']['tmp_name'],"image/restaurant/foodimages/".$_FILES['food_pic']['name']);
+        move_uploaded_file($_FILES['prod_img']['tmp_name'], $upload);
         echo "<script>location.href='dashboard.php';</script>";
           Session::set('msg', '<div class="alert alert-success alert-dismissible mt-3" id="flash-msg">
           <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -552,10 +623,12 @@ class Users{
       }else{
         $msg = '<div class="alert alert-danger alert-dismissible mt-3" id="flash-msg">
   <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-  <strong>Error !</strong> Something went Wrong !</div>';
+  <strong>Error !</strong> Ada yang salah !</div>';
           return $msg;
       }
     }
+
+    
 
     public function AddKategori($data){
         $kategori = $data['kategori'];
@@ -571,7 +644,7 @@ class Users{
         }else{
           $msg = '<div class="alert alert-danger alert-dismissible mt-3" id="flash-msg">
     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-    <strong>Error !</strong> Something went Wrong !</div>';
+    <strong>Error !</strong> Ada yang salah !</div>';
             return $msg;
         }
     }
@@ -631,12 +704,11 @@ class Users{
       $stmt->bindValue(':status', $status);
       $result = $stmt->execute();
       if ($result) {
-        move_uploaded_file($_FILES['food_pic']['tmp_name'],"image/restaurant/foodimages/".$_FILES['food_pic']['name']);
         echo "<script>location.href='index.php';</script>";
       }else{
         $msg = '<div class="alert alert-danger alert-dismissible mt-3" id="flash-msg">
   <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-  <strong>Error !</strong> Something went Wrong !</div>';
+  <strong>Error !</strong> Ada yang salah !</div>';
           return $msg;
       }
     }
@@ -647,6 +719,25 @@ class Users{
       $stmt->execute();
       return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
+
+    public function updateOrderByIdInfo($order_id, $data){
+      $npembeli = $data['no_pembeli'];
+      $status = $data['status'];
+      
+
+        $sql = "UPDATE tbl_order SET
+          no_pembeli = :pembeli,
+          status = :status
+          WHERE order_id = :order_id";
+          $stmt= $this->db->pdo->prepare($sql);
+          $stmt->bindValue(':pembeli', $npembeli);
+          $stmt->bindValue(':status', $status);
+          $stmt->bindValue(':order_id', $order_id);
+          $result = $stmt->execute();
+          if ($result) {
+            echo "<script>location.href='vieworder.php';</script>";
+          }
+      }
 
     public function CountOrder(){
       $sql = "SELECT COUNT(*) FROM tbl_order WHERE order_id";
@@ -668,23 +759,6 @@ class Users{
 
 
     }
-
-    public function updateOrderByIdInfo($order_id, $data){
-      $status = $data['status'];
-
-        $sql = "UPDATE tbl_order SET
-          status = :status
-          WHERE order_id = :order_id";
-          $stmt= $this->db->pdo->prepare($sql);
-          $stmt->bindValue(':status', $status);
-          $stmt->bindValue(':order_id', $order_id);
-          $result =   $stmt->execute();
-          if ($result) {
-            echo "<script>location.href='vieworder.php';</script>";
-          }
-      }
-
-    
 
 
 

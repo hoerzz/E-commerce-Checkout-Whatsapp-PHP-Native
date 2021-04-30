@@ -22,13 +22,13 @@ if (isset($msg)) {
 Session::set("msg", NULL);
 Session::set("logMsg", NULL);
 
-if (isset($_GET['remove'])) {
-  $remove = preg_replace('/[^a-zA-Z0-9-]/', '', (int)$_GET['remove']);
-  $removeUser = $users->deleteUserById($remove);
+if (isset($_GET['remove_produk'])) {
+  $remove_produk = preg_replace('/[^a-zA-Z0-9-]/', '', (int)$_GET['remove_produk']);
+  $remove_produk = $users->deleteProdukById($remove_produk);
 }
 
-if (isset($removeUser)) {
-  echo $removeUser;
+if (isset($remove_produk)) {
+  echo $remove_produk;
 }
 if (isset($_GET['deactive'])) {
   $deactive = preg_replace('/[^a-zA-Z0-9-]/', '', (int)$_GET['deactive']);
@@ -176,7 +176,6 @@ $countproduk = $stmt->fetchColumn();
                       <th  class="text-center">Nama Produk</th>
                       <th  class="text-center">Gambar Produk</th>
                       <th  class="text-center">Harga</th>
-                      <th  class="text-center">Deskripsi</th>
                       <th  class="text-center">Kategori</th>
                       <th  class="text-center">Action</th>
                     </tr>
@@ -201,11 +200,17 @@ $countproduk = $stmt->fetchColumn();
                         <td><?php echo $i; ?></td>
                         <td><?php echo $value->penjual; ?></td>
                         <td><?php echo $value->namaproduk; ?></td>
-                        <td><?php echo '<img src=image/restaurant/foodimages/',$value->fldimage,' height="100" width="100" >'; ?></td>
+                        <td><?php echo '<img src=',$value->fldimage,' height="100" width="100" >'; ?></td>
                         <td><?php echo "Rp. ". number_format($value->harga); ?></td>
-                        <td><?php echo $value->deskripsi; ?></td>
                         <td><?php echo $value->kategori; ?></td>
-                        <td><a class="btn btn-info btn-sm " href="productDetail.php?id=<?php echo $value->product_id;?>" target="_blank">View</a></td>
+                        <td><a class="btn btn-info btn-sm " href="productDetail.php?id=<?php echo $value->product_id;?>" target="_blank">View</a>
+                            <a class="btn btn-info btn-sm " href="updateProduk.php?id=<?php echo $value->product_id;?>">Update Produk</a>
+                            <a onclick="return confirm('Are you sure To Delete ?')" class="btn btn-danger
+                    <?php if (Session::get("product_id") == TRUE) {
+                      echo "disabled";
+                    } ?>
+                             btn-sm " href="?remove_produk=<?php echo $value->product_id;?>">Remove</a>
+                        </td>
                       </tr>
                     <?php }}else{ ?>
                       <tr class="text-center">

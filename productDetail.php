@@ -217,7 +217,7 @@ if (isset($_GET['id'])) {
 					<div class="row">
 						<div class="col-lg-9 image_col">
 							<div class="single_product_image">
-								<div class="single_product_image_background" style="background-image:url(image/restaurant/foodimages/<?php echo $getProduknfo->fldimage; ?>)"></div>
+								<div class="single_product_image_background" style="background-image:url(<?php echo $getProduknfo->fldimage; ?>)"></div>
 							</div>
 						</div>
 					</div>
@@ -235,13 +235,6 @@ if (isset($_GET['id'])) {
 					</div>
                     <br>
 					<div class="product_price">Rp. <?php echo number_format($getProduknfo->harga); ?></div>
-					<ul class="star_rating">
-						<li><i class="fa fa-star" aria-hidden="true"></i></li>
-						<li><i class="fa fa-star" aria-hidden="true"></i></li>
-						<li><i class="fa fa-star" aria-hidden="true"></i></li>
-						<li><i class="fa fa-star" aria-hidden="true"></i></li>
-						<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-					</ul>
 					<div class="quantity d-flex flex-column flex-sm-row align-items-sm-center">
 					<span>Penjual : <b><?php echo $getProduknfo->penjual; ?></b></span>
 						<button type="button" class="red_button add_to_cart_button" data-toggle="modal" data-target="#exampleModal">Beli Sekarang</button>

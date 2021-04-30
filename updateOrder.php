@@ -35,10 +35,15 @@ Session::CheckSession();
             if ($getOrderInfo) {
             ?>
            <h2 class="section-title">Status Sekarang : <span style="color:blue;"><?php echo $getOrderInfo->status; ?></span> </h2> 
-           
                 <form action="" method="POST">
                     <div class="form-group">
-                      <label class="d-block">Update</label>
+                    <label class="d-block">Update Nomor</label>
+                         <label for="food_name">No Wa Valid :</label>
+                            <input type="number" class="form-control" value="<?php echo $getOrderInfo->no_pembeli; ?>" placeholder="Gunakan Kode Negara Cth :62xxxxx" name="no_pembeli" required>
+                            <label for="food_name">Gunakan Kode Negara Cth :62xxxxx</label>
+                    </div>
+                    <div class="form-group">
+                      <label class="d-block">Update Status</label>
                       <div class="form-check">
                       <input name="npembeli" id="wa_email" class="form_input input_email input_ph" type="hidden" placeholder="Nama" required="required" data-error="Valid email is required." value="rudin@gmail.com">
                         <input class="form-check-input" type="radio" value="Terkirim" name="status" id="status1">
@@ -53,7 +58,7 @@ Session::CheckSession();
                         </label>
                       </div>
                       <div class="form-check">
-                        <input class="form-check-input" type="radio" value="Proses" name="status" id="status2">
+                        <input class="form-check-input" type="radio" value="Proses" name="status" id="status2" checked>
                         <label class="form-check-label" for="status2">
                           Proses
                         </label>

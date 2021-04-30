@@ -10,6 +10,42 @@ Session::CheckSession();
           </div>
           <div class="section-body">
         <div class="card-body pr-2 pl-2">
+        <?php
+        $logMsg = Session::get('logMsg');
+if (isset($logMsg)) {
+  echo $logMsg;
+}
+$msg = Session::get('msg');
+if (isset($msg)) {
+  echo $msg;
+}
+Session::set("msg", NULL);
+Session::set("logMsg", NULL);
+
+if (isset($_GET['remove'])) {
+          $remove = preg_replace('/[^a-zA-Z0-9-]/', '', (int)$_GET['remove']);
+          $remove = $users->deleteUserById($remove);
+        }        
+        if (isset($remove)) {
+          echo $remove;
+        }
+if (isset($_GET['deactive'])) {
+  $deactive = preg_replace('/[^a-zA-Z0-9-]/', '', (int)$_GET['deactive']);
+  $deactiveId = $users->userDeactiveByAdmin($deactive);
+}
+
+if (isset($deactiveId)) {
+  echo $deactiveId;
+}
+if (isset($_GET['active'])) {
+  $active = preg_replace('/[^a-zA-Z0-9-]/', '', (int)$_GET['active']);
+  $activeId = $users->userActiveByAdmin($active);
+}
+
+if (isset($activeId)) {
+  echo $activeId;
+}
+        ?>
         <?php if (Session::get('id') == TRUE) { ?>
             <?php if (Session::get('roleid') == '1') { ?>
               <div style="overflow-x:auto;">
@@ -45,7 +81,7 @@ Session::CheckSession();
                       >
 
                         <td><?php echo $i; ?></td>
-                        <td><?php echo '<img src=image/restaurant/',$value->email,'/',$value->fld_logo,' height="100" width="100" >'; ?></td>
+                        <td><?php echo '<img src=',$value->fld_logo,' height="100" width="100" >'; ?></td>
                         <td><?php echo $value->username; ?> <br>
                           <?php if ($value->roleid  == '1'){
                           echo "<span class='badge badge-lg badge-info text-white'>Admin</span>";
