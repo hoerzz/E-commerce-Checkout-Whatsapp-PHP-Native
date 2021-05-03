@@ -63,8 +63,7 @@ Session::CheckSession();
 				   
                 </div>
                 
-                <?php  } ?>
-                <?php } else { 
+                <?php }} else { 
                   echo '<div class="alert alert-danger alert-has-icon">
                       <div class="alert-icon"><i class="far fa-lightbulb"></i></div>
                       <div class="alert-body">

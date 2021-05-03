@@ -228,7 +228,7 @@ if (isset($_GET['id'])) {
 				<div class="product_details">
 					<div class="product_details_title">
 						<h2><?php echo $getProduknfo->namaproduk; ?></h2>
-						<p><?php echo nl2br($getProduknfo->deskripsi); ?></p>
+						<p><?php echo substr($getProduknfo->deskripsi,0,300); ?><a href="#description">..Selengkapnya</a></p>
 					</div>
 					<div class="free_delivery d-flex flex-row align-items-center justify-content-center">
 						<span class="ti-truck"></span><span>free delivery</span>
@@ -301,7 +301,7 @@ if (isset($_GET['id'])) {
 		<div class="container">
 			<div class="row">
 				<div class="col">
-					<div class="tabs_container">
+					<div id="description" class="tabs_container">
 						<ul class="tabs d-flex flex-sm-row flex-column align-items-left align-items-md-center justify-content-center">
 							<li class="tab active" data-active-tab="tab_1"><span>Description</span></li>
 							<li class="tab" data-active-tab="tab_2"><span>Additional Information</span></li>

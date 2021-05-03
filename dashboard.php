@@ -11,90 +11,63 @@ Session::CheckSession();
           <div class="section-body">
         <div class="card-body pr-2 pl-2">
         <?php
-$logMsg = Session::get('logMsg');
-if (isset($logMsg)) {
-  echo $logMsg;
-}
-$msg = Session::get('msg');
-if (isset($msg)) {
-  echo $msg;
-}
-Session::set("msg", NULL);
-Session::set("logMsg", NULL);
+        $logMsg = Session::get('logMsg');
+        if (isset($logMsg)) {
+          echo $logMsg;
+        }
+        $msg = Session::get('msg');
+        if (isset($msg)) {
+          echo $msg;
+        }
+        Session::set("msg", NULL);
+        Session::set("logMsg", NULL);
 
-if (isset($_GET['remove_produk'])) {
-  $remove_produk = preg_replace('/[^a-zA-Z0-9-]/', '', (int)$_GET['remove_produk']);
-  $remove_produk = $users->deleteProdukById($remove_produk);
-}
+        if (isset($_GET['remove_produk'])) {
+          $remove_produk = preg_replace('/[^a-zA-Z0-9-]/', '', (int)$_GET['remove_produk']);
+          $remove_produk = $users->deleteProdukById($remove_produk);
+        }
 
-if (isset($remove_produk)) {
-  echo $remove_produk;
-}
-if (isset($_GET['deactive'])) {
-  $deactive = preg_replace('/[^a-zA-Z0-9-]/', '', (int)$_GET['deactive']);
-  $deactiveId = $users->userDeactiveByAdmin($deactive);
-}
+        if (isset($remove_produk)) {
+          echo $remove_produk;
+        }
+        if (isset($_GET['deactive'])) {
+          $deactive = preg_replace('/[^a-zA-Z0-9-]/', '', (int)$_GET['deactive']);
+          $deactiveId = $users->userDeactiveByAdmin($deactive);
+        }
 
-if (isset($deactiveId)) {
-  echo $deactiveId;
-}
-if (isset($_GET['active'])) {
-  $active = preg_replace('/[^a-zA-Z0-9-]/', '', (int)$_GET['active']);
-  $activeId = $users->userActiveByAdmin($active);
-}
+        if (isset($deactiveId)) {
+          echo $deactiveId;
+        }
+        if (isset($_GET['active'])) {
+          $active = preg_replace('/[^a-zA-Z0-9-]/', '', (int)$_GET['active']);
+          $activeId = $users->userActiveByAdmin($active);
+        }
 
-if (isset($activeId)) {
-  echo $activeId;
-}
-$db = new Database();
-$sql = "SELECT COUNT(*) FROM tbl_order WHERE order_id";
-$stmt = $db->pdo->query($sql);
-$countorder = $stmt->fetchColumn();
+        if (isset($activeId)) {
+          echo $activeId;
+        }
+        $db = new Database();
+        $sql = "SELECT COUNT(*) FROM tbl_order WHERE order_id";
+        $stmt = $db->pdo->query($sql);
+        $countorder = $stmt->fetchColumn();
 
-$sql = "SELECT COUNT(*) FROM tbl_users WHERE id";
-$stmt = $db->pdo->query($sql);
-$countuser = $stmt->fetchColumn();
+        $sql = "SELECT COUNT(*) FROM tbl_users WHERE id";
+        $stmt = $db->pdo->query($sql);
+        $countuser = $stmt->fetchColumn();
 
-$sql = "SELECT COUNT(*) FROM tbl_produk WHERE product_id ";
-$stmt = $db->pdo->query($sql);
-$countproduk = $stmt->fetchColumn();
- ?>
+        $sql = "SELECT COUNT(*) FROM tbl_produk WHERE product_id ";
+        $stmt = $db->pdo->query($sql);
+        $countproduk = $stmt->fetchColumn();
+        ?>
           <div class="row">
-          <div class="col-12 mb-4">
-                <div class="hero text-white hero-bg-image hero-bg-parallax" data-background="https://th.bing.com/th/id/R80eadb38292891deec853ccbc7cb789b?rik=HMEbnzrFe81ITg&riu=http%3a%2f%2fblogs.ubc.ca%2fcham93%2ffiles%2f2013%2f10%2fyoung-women-girls-shopping-81.jpg&ehk=8uSdJeoYoEu6Lmf6iUvjUtbbZjrecl7sbD0wTdYGQMM%3d&risl=&pid=ImgRaw">
-                  <div class="hero-inner">
-                    <h2>Welcome, <?php $username = Session::get('username');if (isset($username)) {echo $username;}?></h2>
-                    <p class="lead">Selamat Bergabung Di Zyrushshop</p>
-                    <div class="mt-4">
-                      <a href="profile.php?id=<?php echo Session::get("id"); ?>" class="btn btn-outline-white btn-lg btn-icon icon-left"><i class="far fa-user"></i> Setup Account</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
           <div class="col-lg-4 col-md-4 col-sm-12">
               <div class="card card-statistic-2">
-                <!-- <div class="card-stats">
-                  <div class="card-stats-items">
-                    <div class="card-stats-item">
-                      <div class="card-stats-item-count">24</div>
-                      <div class="card-stats-item-label">Pending</div>
-                    </div>
-                    <div class="card-stats-item">
-                      <div class="card-stats-item-count">12</div>
-                      <div class="card-stats-item-label">Shipping</div>
-                    </div>
-                    <div class="card-stats-item">
-                      <div class="card-stats-item-count">23</div>
-                      <div class="card-stats-item-label">Completed</div>
-                    </div>
-                  </div>
-                </div> -->
                 <div class="card-icon shadow-primary bg-primary">
-                  <i class="fas fa-archive"></i>
+                  <i class="fas fa-clipboard-list"></i>
                 </div>
                 <div class="card-wrap">
                   <div class="card-header">
-                    <h4> <a href="vieworder.php">Total Orders</a> </h4>
+                    <h4> <a href="vieworder.php">Total Orders In Database</a> </h4>
                   </div>
                   <div class="card-body">
                   <?php echo $countorder ?>
@@ -104,28 +77,19 @@ $countproduk = $stmt->fetchColumn();
             </div>
             <div class="col-lg-4 col-md-4 col-sm-12">
               <div class="card card-statistic-2">
-                <!-- <div class="card-stats">
-                  <div class="card-stats-items">
-                    <div class="card-stats-item">
-                      <div class="card-stats-item-count">24</div>
-                      <div class="card-stats-item-label">Pending</div>
-                    </div>
-                    <div class="card-stats-item">
-                      <div class="card-stats-item-count">12</div>
-                      <div class="card-stats-item-label">Shipping</div>
-                    </div>
-                    <div class="card-stats-item">
-                      <div class="card-stats-item-count">23</div>
-                      <div class="card-stats-item-label">Completed</div>
-                    </div>
-                  </div>
-                </div> -->
                 <div class="card-icon shadow-primary bg-primary">
-                  <i class="fas fa-archive"></i>
+                  <i class="fas fa-users"></i>
                 </div>
                 <div class="card-wrap">
                   <div class="card-header">
-                    <h4> <a href="userlist.php">Total User</a> </h4>
+                  <?php if (Session::get('id') == TRUE) { ?>
+                  <?php if (Session::get('roleid') == '1') { ?>
+                    <h4> <a href="userlist.php">Total User In Database</a> </h4>
+                  <?php }} ?>
+                  <?php if (Session::get('id') == TRUE) { ?>
+                  <?php if (Session::get('roleid') == '2') { ?>
+                    <h4>Total User In Database</h4>
+                  <?php }} ?>
                   </div>
                   <div class="card-body">
                   <?php echo $countuser ?>
@@ -135,28 +99,12 @@ $countproduk = $stmt->fetchColumn();
             </div>
             <div class="col-lg-4 col-md-4 col-sm-12">
               <div class="card card-statistic-2">
-                <!-- <div class="card-stats">
-                  <div class="card-stats-items">
-                    <div class="card-stats-item">
-                      <div class="card-stats-item-count">24</div>
-                      <div class="card-stats-item-label">Pending</div>
-                    </div>
-                    <div class="card-stats-item">
-                      <div class="card-stats-item-count">12</div>
-                      <div class="card-stats-item-label">Shipping</div>
-                    </div>
-                    <div class="card-stats-item">
-                      <div class="card-stats-item-count">23</div>
-                      <div class="card-stats-item-label">Completed</div>
-                    </div>
-                  </div>
-                </div> -->
                 <div class="card-icon shadow-primary bg-primary">
-                  <i class="fas fa-archive"></i>
+                  <i class="fas fa-shopping-cart"></i>
                 </div>
                 <div class="card-wrap">
                   <div class="card-header">
-                    <h4><a href="addProduct.php">Total Produk</a></h4>
+                    <h4><a href="#produk">Total Produk In Database</a></h4>
                   </div>
                   <div class="card-body">
                   <?php echo $countproduk ?>
@@ -165,9 +113,10 @@ $countproduk = $stmt->fetchColumn();
               </div>
             </div>
           </div>
-
-          <h2 class="section-title">Data Produk</h2>
-          <div style="overflow-x:auto;">
+          <h2 id="produk" class="section-title">Data Produk</h2>
+          <?php if (Session::get('id') == TRUE) { ?>
+            <?php if (Session::get('roleid') == '1') { ?>
+              <div style="overflow-x:auto;">
             <table id="example" class="table table-striped table-bordered" style="width:100%">
                   <thead>
                     <tr>
@@ -222,8 +171,56 @@ $countproduk = $stmt->fetchColumn();
 
               </table>
               </div>
+            <?php }} ?>
+            <?php if (Session::get('id') == TRUE) { ?>
+            <?php if (Session::get('roleid') == '2') { ?>
+          <?php
+          $getUinfo = $users->getUserInfoById(Session::get("id"));
+          if ($getUinfo) {
+          ?>
+          <div style="overflow-x:auto;">
+            <table id="example" class="table table-striped table-bordered" style="width:100%">
+                  <thead>
+                    <tr>
+                      <th  class="text-center">Nama Produk</th>
+                      <th  class="text-center">Gambar Produk</th>
+                      <th  class="text-center">Harga</th>
+                      <th  class="text-center">Kategori</th>
+                      <th  class="text-center">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                     <?php
+                      $penjual = $getUinfo->username;
+                      $link = new Database();
+                      $sql = "SELECT * FROM tbl_produk WHERE penjual = :penjual ORDER BY product_id DESC";
+                      $stmt = $link->pdo->prepare($sql);
+                      $stmt->bindValue(':penjual', $penjual);
+                      $stmt->execute();
+                      while($data = $stmt->fetch()){
+                     ?>
+                      <tr class="text-center">
+                        <td><?php echo $data["namaproduk"]; ?></td>
+                        <td><?php echo '<img src=',$data["fldimage"],' height="100" width="100" >'; ?></td>
+                        <td><?php echo "Rp. ". number_format($data["harga"]); ?></td>
+                        <td><?php echo $data["kategori"]; ?></td>
+                        <td><a class="btn btn-info btn-sm " href="productDetail.php?id=<?php echo $data["product_id"];?>" target="_blank">View</a>
+                            <a class="btn btn-info btn-sm " href="updateProduk.php?id=<?php echo $data["product_id"];?>">Update Produk</a>
+                            <a onclick="return confirm('Are you sure To Delete ?')" class="btn btn-danger
+                    <?php if (Session::get("product_id") == TRUE) {
+                      echo "disabled";
+                    } ?>
+                             btn-sm " href="?remove_produk=<?php echo $data["product_id"];?>">Remove</a>
+                        </td>
+                      </tr>
+                      <?php } ?>
 
+                  </tbody>
 
+              </table>
+              </div>
+              <?php }?>
+              <?php }} ?>
 
 
 
@@ -237,5 +234,4 @@ $countproduk = $stmt->fetchColumn();
 
   <?php
   include 'inc/footer.php';
-
   ?>

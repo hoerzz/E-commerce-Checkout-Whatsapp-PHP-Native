@@ -37,7 +37,7 @@ Session::CheckSession();
            <h2 class="section-title">Status Sekarang : <span style="color:blue;"><?php echo $getOrderInfo->status; ?></span> </h2> 
                 <form action="" method="POST">
                     <div class="form-group">
-                    <label class="d-block">Update Nomor</label>
+                    <label class="d-block">Update Nomor Pembeli</label>
                          <label for="food_name">No Wa Valid :</label>
                             <input type="number" class="form-control" value="<?php echo $getOrderInfo->no_pembeli; ?>" placeholder="Gunakan Kode Negara Cth :62xxxxx" name="no_pembeli" required>
                             <label for="food_name">Gunakan Kode Negara Cth :62xxxxx</label>
