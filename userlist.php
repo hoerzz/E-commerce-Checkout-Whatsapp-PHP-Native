@@ -87,8 +87,6 @@ if (isset($activeId)) {
                           echo "<span class='badge badge-lg badge-info text-white'>Admin</span>";
                         } elseif ($value->roleid == '2') {
                           echo "<span class='badge badge-lg badge-dark text-white'>Vendor</span>";
-                        }elseif ($value->roleid == '3') {
-                            echo "<span class='badge badge-lg badge-dark text-white'>User</span>";
                         } ?></td>
                         <td><?php echo $value->email; ?></td>
 
