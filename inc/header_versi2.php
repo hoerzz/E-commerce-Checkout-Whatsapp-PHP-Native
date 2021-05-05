@@ -27,7 +27,7 @@ $users = new Users();
 
   <!-- General CSS Files -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LgjH2m5c8emE66pjdExmgep47BAdKTrCJ7RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
   <!-- CSS Libraries -->
 
@@ -37,7 +37,7 @@ $users = new Users();
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
 </head>
 
-<body>
+<body class="layout-3">
 
 
 <?php
@@ -56,19 +56,45 @@ if (isset($_GET['action']) && $_GET['action'] == 'logout') {
 
 
 
-<div id="app">
-    <div class="main-wrapper">
+  <div id="app">
+    <div class="main-wrapper container">
       <div class="navbar-bg"></div>
       <nav class="navbar navbar-expand-lg main-navbar">
-        <form class="form-inline mr-auto">
-          <ul class="navbar-nav mr-3">
-            <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
+        <a href="dashboard.php" class="navbar-brand sidebar-gone-hide">ZYRUSHSHOP</a>
+        <div class="navbar-nav">
+          <a href="#" class="nav-link sidebar-gone-show" data-toggle="sidebar"><i class="fas fa-bars"></i></a>
+        </div>
+        <div class="nav-collapse">
+          <a class="sidebar-gone-show nav-collapse-toggle nav-link" href="#">
+            <i class="fas fa-ellipsis-v"></i>
+          </a>
+          <ul class="navbar-nav">
+          <?php if (Session::get('id') == TRUE) { ?>
+            <?php if (Session::get('roleid') == '1') { ?>
+              <li class="nav-item"><a href="report_order.php" class="nav-link"><i class="fas fa-file-pdf"></i> <span>Download Laporan Order</span></a></li>
+              <li class="nav-item"><a href="report_product.php" class="nav-link"><i class="fas fa-file-pdf"></i> <span>Download Laporan Product</span></a></li>
+              <li class="nav-item"><a href="report_akun.php" class="nav-link"><i class="fas fa-file-pdf"></i> <span>Download Laporan Akun</span></a></li>
+              <?php  } ?>
+              <?php } ?>
+          <?php if (Session::get('id') == TRUE) { ?>
+            <?php if (Session::get('roleid') == '2') { ?>
+              <li class="nav-item"><a href="report_order.php" class="nav-link"><i class="fas fa-file-pdf"></i> <span>Download Laporan Order</span></a></li>
+              <li class="nav-item"><a href="report_product.php" class="nav-link"><i class="fas fa-file-pdf"></i> <span>Download Laporan Product</span></a></li>
+            <?php  } ?>
+          <?php }?>
           </ul>
+        </div>
+
+        <form class="form-inline ml-auto">
+          <ul class="navbar-nav">
+            <li><a href="#" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i class="fas fa-search"></i></a></li>
+          </ul>
+          <div class="search-element">
+            <input class="form-control" type="search" placeholder="Search" aria-label="Search" data-width="250">
+            <button class="btn" type="submit"><i class="fas fa-search"></i></button>
+            <div class="search-backdrop"></div>
+          </div>
         </form>
-        <?php if (Session::get('id') == TRUE) { ?>
-            <?php if (Session::get('roleid') == '3') { ?>
-              <?php  } ?> 
-              <?php  } ?> 
         <ul class="navbar-nav navbar-right">
         <?php
     $getUinfo = $users->getUserInfoById(Session::get("id"));
@@ -106,16 +132,11 @@ if (isset($_GET['action']) && $_GET['action'] == 'logout') {
           </li>
         </ul>
       </nav>
-      <div class="main-sidebar">
-        <aside id="sidebar-wrapper">
-          <div class="sidebar-brand">
-            <a href="dashboard.html">ZYRUSHSHOP</a>
-          </div>
-          <div class="sidebar-brand sidebar-brand-sm">
-            <a href="dashboard.html">ZS</a>
-          </div>
-          <ul class="sidebar-menu">
-              <?php if (Session::get('id') == TRUE) { ?>
+
+      <nav class="navbar navbar-secondary navbar-expand-lg">
+        <div class="container">
+          <ul class="navbar-nav">
+          <?php if (Session::get('id') == TRUE) { ?>
             <?php if (Session::get('roleid') == '1') { ?>
                 <li class="nav-item"><a href="dashboard.php" class="nav-link"><i class="fas fa-fire"></i><span>Dashboard</span></a></li>
                 <li class="nav-item"><a href="userlist.php" class="nav-link"><i class="fas fa-user-alt"></i> <span>User List</span></a></li>
@@ -134,24 +155,6 @@ if (isset($_GET['action']) && $_GET['action'] == 'logout') {
                 <li class="nav-item"><a href="addCategory.php" class="nav-link"><i class="fas fa-list-alt"></i> <span>Add Category</span></a></li>
             <?php  } ?>
           <?php }?>
-          <li class="nav-item dropdown">
-                <a href="#" class="nav-link has-dropdown"><i class="fas fa-download"></i> <span>Download Laporan</span></a>
-                <ul class="dropdown-menu">
-                    <?php if (Session::get('id') == TRUE) { ?>
-                  <?php if (Session::get('roleid') == '1') { ?>
-                    <li class="nav-item"><a href="report_order.php" class="nav-link"><i class="fas fa-file-pdf"></i> <span>Laporan Order</span></a></li>
-                    <li class="nav-item"><a href="report_product.php" class="nav-link"><i class="fas fa-file-pdf"></i> <span>Laporan Product</span></a></li>
-                    <li class="nav-item"><a href="report_akun.php" class="nav-link"><i class="fas fa-file-pdf"></i> <span>Laporan Akun</span></a></li>
-                    <?php  } ?>
-                    <?php } ?>
-                <?php if (Session::get('id') == TRUE) { ?>
-                  <?php if (Session::get('roleid') == '2') { ?>
-                    <li class="nav-item"><a href="report_order.php" class="nav-link"><i class="fas fa-file-pdf"></i> <span>Laporan Order</span></a></li>
-                    <li class="nav-item"><a href="report_product.php" class="nav-link"><i class="fas fa-file-pdf"></i> <span>Laporan Product</span></a></li>
-                <?php  } ?>
-              <?php }?>
-                </ul>
-              </li>
-            </ul>
-        </aside>
-      </div>
+          </ul>
+        </div>
+      </nav>

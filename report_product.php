@@ -44,14 +44,16 @@
         $pdf->SetFont('Arial','B',12);
         $pdf->Ln(15);//Ln = pindah baris
         $pdf->Cell(15,10,'NO','1');
-        $pdf->Cell(150,10,'Nama Produk','1');
+        $pdf->Cell(100,10,'Nama Produk','1');
+        $pdf->Cell(60,10,'Nama Penjual','1');
 		$pdf->Cell(20,10,'Kategori','1');
         $pdf->Cell(70,10,'Harga','1');
         $pdf->Ln(10);
         while($data = $stmt->fetch()){
 
 			$pdf->Cell(15,10,  $no, 1);
-            $pdf->Cell(150,10, $data["namaproduk"],1);
+            $pdf->Cell(100,10, $data["namaproduk"],1);
+            $pdf->Cell(60,10, $data["penjual"],1);
 			$pdf->Cell(20,10,  $data["kategori"],1);
             $pdf->Cell(70,10,  $data["harga"],1);
 
