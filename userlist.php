@@ -52,7 +52,7 @@ if (isset($activeId)) {
           <table id="example" class="table table-striped table-bordered" style="width:100%">
                   <thead>
                     <tr>
-                      <th  class="text-center">SL</th>
+                      <th  class="text-center">No</th>
                       <th  class="text-center">Foto</th>
                       <th  class="text-center">Username</th>
                       <th  class="text-center">Email address</th>

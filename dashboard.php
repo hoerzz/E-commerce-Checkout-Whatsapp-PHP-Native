@@ -120,7 +120,7 @@ Session::CheckSession();
             <table id="example" class="table table-striped table-bordered" style="width:100%">
                   <thead>
                     <tr>
-                      <th  class="text-center">SL</th>
+                      <th  class="text-center">No</th>
                       <th  class="text-center">Penjual</th>
                       <th  class="text-center">Nama Produk</th>
                       <th  class="text-center">Gambar Produk</th>
@@ -182,6 +182,7 @@ Session::CheckSession();
             <table id="example" class="table table-striped table-bordered" style="width:100%">
                   <thead>
                     <tr>
+                      <th  class="text-center">No</th>
                       <th  class="text-center">Nama Produk</th>
                       <th  class="text-center">Gambar Produk</th>
                       <th  class="text-center">Harga</th>
@@ -191,6 +192,7 @@ Session::CheckSession();
                   </thead>
                   <tbody>
                      <?php
+                      $no = 1;
                       $penjual = $getUinfo->username;
                       $link = new Database();
                       $sql = "SELECT * FROM tbl_produk WHERE penjual = :penjual ORDER BY product_id DESC";
@@ -200,6 +202,7 @@ Session::CheckSession();
                       while($data = $stmt->fetch()){
                      ?>
                       <tr class="text-center">
+                        <td><?php echo $no; ?></td>
                         <td><?php echo $data["namaproduk"]; ?></td>
                         <td><?php echo '<img src=',$data["fldimage"],' height="100" width="100" >'; ?></td>
                         <td><?php echo "Rp. ". number_format($data["harga"]); ?></td>
@@ -213,7 +216,9 @@ Session::CheckSession();
                              btn-sm " href="?remove_produk=<?php echo $data["product_id"];?>">Remove</a>
                         </td>
                       </tr>
-                      <?php } ?>
+                      <?php 
+                      $no++;
+                      } ?>
 
                   </tbody>
 

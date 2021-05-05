@@ -19,7 +19,7 @@ if (isset($_GET['id'])) {
             <table id="example" class="table table-striped table-bordered" style="width:100%">
                   <thead>
                     <tr>
-                      <th  class="text-center">SL</th>
+                      <th  class="text-center">No</th>
                       <th  class="text-center">Nama Penjual</th>
                       <th  class="text-center">Nama Produk</th>
                       <th  class="text-center">Jumlah</th>
@@ -78,6 +78,7 @@ if (isset($_GET['id'])) {
             <table id="example" class="table table-striped table-bordered" style="width:100%">
                   <thead>
                     <tr>
+                      <th  class="text-center">No</th>
                       <th  class="text-center">Nama Produk</th>
                       <th  class="text-center">Jumlah</th>
                       <th  class="text-center">Nama Pembeli</th>
@@ -89,6 +90,7 @@ if (isset($_GET['id'])) {
                   </thead>
                   <tbody>
                     <?php
+                      $no = 1;
                       $penjual = $getUinfo->username;
                       $link = new Database();
                       $sql = "SELECT * FROM tbl_order WHERE penjual = :penjual ORDER BY order_id DESC";
@@ -98,6 +100,7 @@ if (isset($_GET['id'])) {
                      ?>
                       <?php while($data = $stmt->fetch()){ ?>
                       <tr class="text-center">
+                        <td><?php echo $no; ?></td>
                         <td><?php echo $data["nproduk"]; ?></td>
                         <td><?php echo $data["jumlah"]; ?></td>
                         <td><?php echo $data["npembeli"]; ?></td>
@@ -106,7 +109,9 @@ if (isset($_GET['id'])) {
                         <td><?php echo $data["status"]; ?></td>
                         <td><a class="btn btn-info btn-sm " href="updateOrder.php?id=<?php echo $data["order_id"];?>">Update Status</a></td>
                       </tr>
-                    <?php } ?>
+                    <?php 
+                    $no++;
+                    } ?>
 
                   </tbody>
 
