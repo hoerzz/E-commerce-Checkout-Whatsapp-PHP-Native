@@ -100,7 +100,7 @@ if (isset($username)) {
               </div>
               <div class="col-12 col-md-12 col-lg-7">
                 <div class="card">
-                <form class="" action="" method="POST">
+                <form action="" method="post" enctype="multipart/form-data">
                 <div class="card-header">
                       <h4>Edit Profile</h4>
                     </div>
@@ -127,6 +127,20 @@ if (isset($username)) {
                     <input type="text" id="mobile" name="address" value="<?php echo $getUinfo->fld_address; ?>" class="form-control">
                   </div>
                   </div>
+                  
+                  <div class="form-group col-md-6 col-12">
+                      <input type="hidden" name="logo_lama" value="<?php echo $getUinfo->fld_logo; ?>">
+                      <label class="col-form-label text-md-left col-md-6 col-6">Thumbnail</label>
+                      <div class="col-sm-12 col-md-7">
+                        <div id="image-preview" class="image-preview">
+                          <label for="image-upload" id="image-label">Choose File</label>
+                          <input type="file" id="files" accept="image/*" name="logo_akun" />
+                          <img id="image" src="<?php echo $getUinfo->fld_logo; ?>" height="256" width="256"/>
+                        </div>
+                        <br><br>
+                        
+                      </div>
+                    </div>
                   
                   <?php if (Session::get("roleid") == '1') { ?>
 
@@ -211,7 +225,19 @@ if (isset($username)) {
 
 </div>
       </div></div></div></section>
+      <script>
+document.getElementById("files").onchange = function () {
+    var reader = new FileReader();
 
+    reader.onload = function (e) {
+        // get loaded data and render thumbnail.
+        document.getElementById("image").src = e.target.result;
+    };
+
+    // read the image file as a data URL.
+    reader.readAsDataURL(this.files[0]);
+};
+</script>
 
   <?php
   include 'inc/footer.php';
