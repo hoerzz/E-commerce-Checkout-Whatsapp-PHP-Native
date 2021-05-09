@@ -127,10 +127,10 @@ if (isset($username)) {
                     <input type="text" id="mobile" name="address" value="<?php echo $getUinfo->fld_address; ?>" class="form-control">
                   </div>
                   </div>
-                  
+                  <div class="row">
                   <div class="form-group col-md-6 col-12">
                       <input type="hidden" name="logo_lama" value="<?php echo $getUinfo->fld_logo; ?>">
-                      <label class="col-form-label text-md-left col-md-6 col-6">Thumbnail</label>
+                      <label class="col-form-label text-md-left col-md-6 col-6">Update Foto</label>
                       <div class="col-sm-12 col-md-7">
                         <div id="image-preview" class="image-preview">
                           <label for="image-upload" id="image-label">Choose File</label>
@@ -141,6 +141,8 @@ if (isset($username)) {
                         
                       </div>
                     </div>
+                    </div>
+                  
                   
                   <?php if (Session::get("roleid") == '1') { ?>
 

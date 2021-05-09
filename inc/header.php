@@ -75,7 +75,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'logout') {
     if ($getUinfo) {
      ?>
           <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-          <?php echo '<img src=',$getUinfo->fld_logo,' class="rounded-circle mr-1" >'; ?>
+          <?php echo '<img src=',$getUinfo->fld_logo,' class="rounded-circle mr-1" width="50" height="30">'; ?>
             <div class="d-sm-none d-lg-inline-block">Hi, <?php $username = Session::get('username'); if (isset($username)) { echo $username; } ?></div></a>
 
             <?php } ?>
