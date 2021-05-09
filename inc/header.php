@@ -109,10 +109,10 @@ if (isset($_GET['action']) && $_GET['action'] == 'logout') {
       <div class="main-sidebar">
         <aside id="sidebar-wrapper">
           <div class="sidebar-brand">
-            <a href="dashboard.html">ZYRUSHSHOP</a>
+            <a href="dashboard.php">ZYRUSHSHOP</a>
           </div>
           <div class="sidebar-brand sidebar-brand-sm">
-            <a href="dashboard.html">ZS</a>
+            <a href="dashboard.php">ZS</a>
           </div>
           <ul class="sidebar-menu">
               <?php if (Session::get('id') == TRUE) { ?>
