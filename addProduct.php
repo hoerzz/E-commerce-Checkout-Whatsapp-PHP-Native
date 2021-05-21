@@ -26,7 +26,7 @@ Session::CheckSession();
                      <form action="" method="post" enctype="multipart/form-data">
             		<div class="form-group">
                          <label for="food_name">Nama Produk :</label>
-                            <input type="hidden" name="penjual" value="<?php $getUinfo = $users->getUserInfoById(Session::get("id")); if ($getUinfo) { echo $getUinfo->username; }?>" class="form-control">
+                            <input type="hidden" name="penjual" value="<?php $getUinfo = $users->getUserInfoById(Session::get("id")); if ($getUinfo) { echo $getUinfo->name; }?>" class="form-control">
                             <input type="hidden" name="notlp" value="<?php $getUinfo = $users->getUserInfoById(Session::get("id")); if ($getUinfo) { echo $getUinfo->mobile; }?>" class="form-control">
                             <input type="text" class="form-control" id="food_name" placeholder="Nama Produk" name="namaproduk" required>
                     </div>

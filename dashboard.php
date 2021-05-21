@@ -193,7 +193,7 @@ Session::CheckSession();
                   <tbody>
                      <?php
                       $no = 1;
-                      $penjual = $getUinfo->username;
+                      $penjual = $getUinfo->name;
                       $link = new Database();
                       $sql = "SELECT * FROM tbl_produk WHERE penjual = :penjual ORDER BY product_id DESC";
                       $stmt = $link->pdo->prepare($sql);

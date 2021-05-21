@@ -26,7 +26,7 @@ Session::CheckSession();
                      <form action="" method="post" enctype="multipart/form-data">
                       <div class="form-group">
                           <label for="name">Name:</label>
-                          <input type="text" class="form-control" id="name" value="<?php if(isset($r_name)) { echo $r_name;}?>" placeholder="Enter Restaurant Name" name="username" required/>
+                          <input type="text" class="form-control" id="name" value="<?php if(isset($r_name)) { echo $r_name;}?>" placeholder="Enter Restaurant Name" name="name" required/>
                       </div>
 	                  <div class="form-group">
                           <label for="name">Email:</label>
@@ -64,13 +64,7 @@ Session::CheckSession();
                 </div>
                 
                 <?php }} else { 
-                  echo '<div class="alert alert-danger alert-has-icon">
-                      <div class="alert-icon"><i class="far fa-lightbulb"></i></div>
-                      <div class="alert-body">
-                        <div class="alert-title">Perhatian</div>
-                        
-                      </div>
-                    </div>'; } ?>
+                  header('Location:dashboard.php'); } ?>
                 
 </div>
 </div></div></div></section>

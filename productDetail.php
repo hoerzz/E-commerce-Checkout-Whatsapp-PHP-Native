@@ -270,7 +270,7 @@ if (isset($_GET['id'])) {
       <div class="modal-body">
 	  				<form action="" method="post" enctype="multipart/form-data">
 						<div>
-							<input type="hidden" name="penjual" value="<?php $getUinfo = $users->getUserInfoById(Session::get("id")); if ($getUinfo) { echo $getUinfo->username; }?>" class="form-control">
+							<input type="hidden" name="penjual" value="<?php $getUinfo = $users->getUserInfoById(Session::get("id")); if ($getUinfo) { echo $getUinfo->name; }?>" class="form-control">
 
 							<input type="hidden" name="nproduk" value="<?php echo $getProduknfo->namaproduk; ?>" class="form-control">
 
@@ -535,7 +535,9 @@ window.onclick = function(event) {
 }
   //]]>      
 </script>
-<?php } ?>
+<?php }else {
+	echo "Produk Telah Dihapus Atau Tidak Ada";
+} ?>
 <script src="assets/Coloshop/styles/bootstrap4/popper.js"></script>
 <script src="assets/Coloshop/styles/bootstrap4/bootstrap.min.js"></script>
 <script src="assets/Coloshop/plugins/Isotope/isotope.pkgd.min.js"></script>

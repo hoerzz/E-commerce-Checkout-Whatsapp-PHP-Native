@@ -194,7 +194,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['register'])) {
 					<p>Silahkan Daftar...</p>
 					<form method="post" enctype="multipart/form-data">
 						<div>
-							<input id="input_email" class="form_input input_email input_ph" type="text" name="username" placeholder="Name" required="required" data-error="Valid email is required.">
+							<input id="input_name" class="form_input input_name input_ph" type="text" name="name" placeholder="Name" required="required" data-error="Valid email is required.">
 
 							<input id="input_name" class="form_input input_name input_ph" type="email" name="email" placeholder="Enter Email" required="required" data-error="Name is required.">
 

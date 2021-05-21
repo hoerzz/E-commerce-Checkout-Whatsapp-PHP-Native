@@ -40,26 +40,27 @@ class Users{
 
   // User Registration Method
   public function userRegistration($data){
-    $username = $data['username'];
+    $name = $data['name'];
     $email = $data['email'];
     $mobile = $data['mobile'];
     $roleid = $data['roleid'];
     $password = $data['password'];
     $address = $data['address'];
     $photo=$_FILES['usr_img']['name'];
-    $upload="image/akunimage/".$photo;
+    $replace = preg_replace('/\s+/', '_', $photo);
+    $upload="image/akunimage/".$replace;
 
     $checkEmail = $this->checkExistEmail($email);
 
-    if ($username == "" || $email == "" || $mobile == "" || $password == "") {
+    if ($name == "" || $email == "" || $mobile == "" || $password == "") {
       $msg = '<div class="alert alert-danger alert-dismissible mt-3" id="flash-msg">
 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 <strong>Error !</strong> Input fields must not be Empty !</div>';
         return $msg;
-    }elseif (strlen($username) < 3) {
+    }elseif (strlen($name) < 3) {
       $msg = '<div class="alert alert-danger alert-dismissible mt-3" id="flash-msg">
 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-<strong>Error !</strong> Username is too short, at least 3 Characters !</div>';
+<strong>Error !</strong> name is too short, at least 3 Characters !</div>';
         return $msg;
     }elseif (filter_var($mobile,FILTER_SANITIZE_NUMBER_INT) == FALSE) {
       $msg = '<div class="alert alert-danger alert-dismissible mt-3" id="flash-msg">
@@ -78,9 +79,9 @@ class Users{
 <strong>Error !</strong> Email already Exists, please try another Email... !</div>';
         return $msg;
     }else{
-      $sql = "INSERT INTO tbl_users(username, email, password, mobile, roleid, fld_address, fld_logo) VALUES(:username, :email, :password, :mobile, :roleid, :address, :logo)";
+      $sql = "INSERT INTO tbl_users(name, email, password, mobile, roleid, fld_address, fld_logo) VALUES(:name, :email, :password, :mobile, :roleid, :address, :logo)";
       $stmt = $this->db->pdo->prepare($sql);
-      $stmt->bindValue(':username', $username);
+      $stmt->bindValue(':name', $name);
       $stmt->bindValue(':email', $email);
       $stmt->bindValue(':password', SHA1($password));
       $stmt->bindValue(':mobile', $mobile);
@@ -102,7 +103,6 @@ class Users{
   <strong>Error !</strong> Ada yang salah !</div>';
           return $msg;
       }
-      $_SESSION['id']=$email;
     }
 
 
@@ -186,7 +186,7 @@ class Users{
           Session::set('id', $logResult->id);
           Session::set('roleid', $logResult->roleid);
           Session::set('email', $logResult->email);
-          Session::set('username', $logResult->username);
+          Session::set('name', $logResult->name);
           Session::set('logMsg', '');
           echo "<script>location.href='dashboard.php';</script>";
 
@@ -225,7 +225,7 @@ class Users{
   //
   //   Get Single User Information By Id Method
     public function updateUserByIdInfo($userid, $data){
-      $username = $data['username'];
+      $name = $data['name'];
       $email = $data['email'];
       $mobile = $data['mobile'];
       $address = $data['address'];
@@ -233,7 +233,9 @@ class Users{
       $oldimage=$_POST['logo_lama'];
 
       if(isset($_FILES['logo_akun']['name'])&&($_FILES['logo_akun']['name']!="")){
-        $newimage="image/akunimage/".$_FILES['logo_akun']['name'];
+        $photo=$_FILES['logo_akun']['name'];
+        $replace = preg_replace('/\s+/', '_', $photo);
+        $newimage="image/akunimage/".$replace;
         unlink($oldimage);
         move_uploaded_file($_FILES['logo_akun']['tmp_name'], $newimage);
       }
@@ -243,12 +245,12 @@ class Users{
       
 
 
-      if ($username == ""|| $email == "" || $mobile == ""  ) {
+      if ($name == ""|| $email == "" || $mobile == ""  ) {
         $msg = '<div class="alert alert-danger alert-dismissible mt-3" id="flash-msg">
   <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
   <strong>Error !</strong> Kolom tidak boleh Kosong!</div>';
           return $msg;
-        }elseif (strlen($username) < 3) {
+        }elseif (strlen($name) < 3) {
           $msg = '<div class="alert alert-danger alert-dismissible mt-3" id="flash-msg">
     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
     <strong>Error !</strong> Nama pengguna terlalu pendek, minimal 3 Karakter!</div>';
@@ -261,7 +263,7 @@ class Users{
       }else{
 
         $sql = "UPDATE tbl_users SET
-          username = :username,
+          name = :name,
           email = :email,
           mobile = :mobile,
           fld_address = :address,
@@ -269,7 +271,7 @@ class Users{
           roleid = :roleid
           WHERE id = :id";
           $stmt= $this->db->pdo->prepare($sql);
-          $stmt->bindValue(':username', $username);
+          $stmt->bindValue(':name', $name);
           $stmt->bindValue(':email', $email);
           $stmt->bindValue(':mobile', $mobile);
           $stmt->bindValue(':address', $address);
@@ -490,7 +492,9 @@ class Users{
       $oldimage=$_POST['oldimage'];
 
       if(isset($_FILES['image']['name'])&&($_FILES['image']['name']!="")){
-        $newimage="image/produk/produkimage/".$_FILES['image']['name'];
+        $photo=$_FILES['image']['name'];
+        $replace = preg_replace('/\s+/', '_', $photo);
+	      $newimage="image/produk/produkimage/".$replace;
         unlink($oldimage);
         move_uploaded_file($_FILES['image']['tmp_name'], $newimage);
       }
@@ -534,7 +538,8 @@ class Users{
       $deskripsi = $data['deskripsi'];
       $kategori = $data['kategori'];
       $photo=$_FILES['prod_img']['name'];
-	    $upload="image/produk/produkimage/".$photo;
+      $replace = preg_replace('/\s+/', '_', $photo);
+	    $upload="image/produk/produkimage/".$replace;
 
       $sql = "INSERT INTO tbl_produk(penjual,notlp,namaproduk,harga,deskripsi,kategori,fldimage) VALUES (:penjual, :notlp, :namaproduk, :harga, :deskripsi, :kategori, :fldimage)";
       $stmt = $this->db->pdo->prepare($sql);

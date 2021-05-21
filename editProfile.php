@@ -49,8 +49,8 @@ if (isset($_GET['id'])) {
                   <div class="card-body">
                   <div class="row">
                   <div class="form-group col-md-6 col-12">
-                    <label for="username">Your Name</label>
-                    <input type="text" name="username" value="<?php echo $getUinfo->username; ?>" class="form-control">
+                    <label for="name">Your Name</label>
+                    <input type="text" name="name" value="<?php echo $getUinfo->name; ?>" class="form-control">
                   </div>
                   <div class="form-group col-md-6 col-12">
                     <label for="email">Email address</label>

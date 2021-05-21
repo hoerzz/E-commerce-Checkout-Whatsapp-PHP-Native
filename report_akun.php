@@ -52,7 +52,7 @@
         while($data = $stmt->fetch()){
 
 			$pdf->Cell(10,10,  $no, 1);
-            $pdf->Cell(70,10, $data["username"],1);
+            $pdf->Cell(70,10, $data["name"],1);
 			$pdf->Cell(50,10,  $data["email"],1);
 			$pdf->Cell(70,10,  $data["mobile"],1);
             $pdf->Cell(65,10,  $data["fld_address"],1);

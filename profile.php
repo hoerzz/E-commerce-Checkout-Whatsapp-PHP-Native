@@ -43,9 +43,9 @@ if (isset($updateUser)) {
      ?>
           <div class="section-body">
             <h2 class="section-title">Hi, <?php
-$username = Session::get('username');
-if (isset($username)) {
-  echo $username;
+$name = Session::get('name');
+if (isset($name)) {
+  echo $name;
 }
  ?></h2>
             <p class="section-lead">
@@ -60,7 +60,7 @@ if (isset($username)) {
                     <div class="profile-widget-items">
                       <div class="profile-widget-item">
                       <div class="profile-widget-item-label">Nama</div>
-                        <div class="profile-widget-item-value"><?php $username = Session::get('username');if (isset($username)) {echo $username;}?></div>
+                        <div class="profile-widget-item-value"><?php $name = Session::get('name');if (isset($name)) {echo $name;}?></div>
                       </div>
                       <div class="profile-widget-item">
                         <div class="profile-widget-item-label">Sebagai</div>
@@ -81,7 +81,7 @@ if (isset($username)) {
                     </div>
                   </div>
                   <div class="profile-widget-description">
-                    <div class="profile-widget-name"><?php $username = Session::get('username');if (isset($username)) {echo $username;}?><div class="text-muted d-inline font-weight-normal"><div class="slash"></div> 
+                    <div class="profile-widget-name"><?php $name = Session::get('name');if (isset($name)) {echo $name;}?><div class="text-muted d-inline font-weight-normal"><div class="slash"></div> 
                     
                     <?php
                     if ( Session::get("roleid") == '1')  {
@@ -107,8 +107,8 @@ if (isset($username)) {
                   <div class="card-body">
                   <div class="row">
                   <div class="form-group col-md-6 col-12">
-                    <label for="username">Your Name</label>
-                    <input type="text" name="username" value="<?php echo $getUinfo->username; ?>" class="form-control">
+                    <label for="name">Your Name</label>
+                    <input type="text" name="name" value="<?php echo $getUinfo->name; ?>" class="form-control">
                   </div>
                   <div class="form-group col-md-6 col-12">
                     <label for="email">Email address</label>

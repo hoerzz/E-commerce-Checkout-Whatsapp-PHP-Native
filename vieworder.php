@@ -91,7 +91,7 @@ if (isset($_GET['id'])) {
                   <tbody>
                     <?php
                       $no = 1;
-                      $penjual = $getUinfo->username;
+                      $penjual = $getUinfo->name;
                       $link = new Database();
                       $sql = "SELECT * FROM tbl_order WHERE penjual = :penjual ORDER BY order_id DESC";
                       $stmt = $link->pdo->prepare($sql);

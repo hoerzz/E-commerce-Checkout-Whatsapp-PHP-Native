@@ -54,7 +54,7 @@ if (isset($activeId)) {
                     <tr>
                       <th  class="text-center">No</th>
                       <th  class="text-center">Foto</th>
-                      <th  class="text-center">Username</th>
+                      <th  class="text-center">name</th>
                       <th  class="text-center">Email address</th>
                       <th  class="text-center">Mobile</th>
                       <th  class="text-center">Status</th>
@@ -82,7 +82,7 @@ if (isset($activeId)) {
 
                         <td><?php echo $i; ?></td>
                         <td><?php echo '<img src=',$value->fld_logo,' height="100" width="100" >'; ?></td>
-                        <td><?php echo $value->username; ?> <br>
+                        <td><?php echo $value->name; ?> <br>
                           <?php if ($value->roleid  == '1'){
                           echo "<span class='badge badge-lg badge-info text-white'>Admin</span>";
                         } elseif ($value->roleid == '2') {
