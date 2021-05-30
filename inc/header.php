@@ -135,21 +135,15 @@ if (isset($_GET['action']) && $_GET['action'] == 'logout') {
             <?php  } ?>
           <?php }?>
           <li class="nav-item dropdown">
-                <a href="#" class="nav-link has-dropdown"><i class="fas fa-download"></i> <span>Download Laporan</span></a>
-                <ul class="dropdown-menu">
                     <?php if (Session::get('id') == TRUE) { ?>
                   <?php if (Session::get('roleid') == '1') { ?>
+                    <a href="#" class="nav-link has-dropdown"><i class="fas fa-download"></i> <span>Download Laporan</span></a>
+                    <ul class="dropdown-menu">
                     <li class="nav-item"><a href="report_order.php" class="nav-link"><i class="fas fa-file-pdf"></i> <span>Laporan Order</span></a></li>
                     <li class="nav-item"><a href="report_product.php" class="nav-link"><i class="fas fa-file-pdf"></i> <span>Laporan Product</span></a></li>
                     <li class="nav-item"><a href="report_akun.php" class="nav-link"><i class="fas fa-file-pdf"></i> <span>Laporan Akun</span></a></li>
                     <?php  } ?>
                     <?php } ?>
-                <?php if (Session::get('id') == TRUE) { ?>
-                  <?php if (Session::get('roleid') == '2') { ?>
-                    <li class="nav-item"><a href="report_order.php" class="nav-link"><i class="fas fa-file-pdf"></i> <span>Laporan Order</span></a></li>
-                    <li class="nav-item"><a href="report_product.php" class="nav-link"><i class="fas fa-file-pdf"></i> <span>Laporan Product</span></a></li>
-                <?php  } ?>
-              <?php }?>
                 </ul>
               </li>
             </ul>

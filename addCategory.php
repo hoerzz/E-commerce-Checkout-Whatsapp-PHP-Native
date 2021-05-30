@@ -9,6 +9,15 @@ Session::CheckSession();
           </div>
           <h2 class="section-title">Tambah Kategori</h2>
           <?php 
+          
+          if (isset($_GET['remove_category'])) {
+            $remove_category = preg_replace('/[^a-zA-Z0-9-]/', '', (int)$_GET['remove_category']);
+            $remove_category = $users->deleteCategoryById($remove_category);
+          }
+  
+          if (isset($remove_category)) {
+            echo $remove_category;
+          }
             if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add'])) {
                 $register = $users->AddKategori($_POST);
               }
@@ -38,6 +47,7 @@ Session::CheckSession();
                     <tr>
                       <th  class="text-center">No</th>
                       <th  class="text-center">Category</th>
+                      <th  class="text-center">Action</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -53,14 +63,18 @@ Session::CheckSession();
                      ?>
 
                       <tr class="text-center"
-                      <?php if (Session::get("id") == $value->id) {
+                      <?php if (Session::get("category_id ") == $value->category_id ) {
                         echo "style='background:#d9edf7' ";
                       } ?>
                       >
 
                         <td><?php echo $i; ?></td>
                         <td><?php echo $value->category; ?></td>
-
+                        <td><a onclick="return confirm('Are you sure To Delete ?')" class="btn btn-danger
+                        <?php if (Session::get("category_id ") == TRUE) {
+                          echo "disabled";
+                        } ?>
+                             btn-sm " href="?remove_category=<?php echo $value->category_id;?>">Remove</a>
                       </tr>
                     <?php }}else{ ?>
                       <tr class="text-center">

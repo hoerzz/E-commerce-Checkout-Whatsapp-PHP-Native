@@ -40,7 +40,7 @@ Session::CheckSession();
 	                <div class="form-group row">
                             <label class="col-md-1 text-md-left text-right mt-2">Deskripsi</label>
                           <div class="col-lg-12 col-md-6">
-                            <textarea rows="10" class="form-control" name="deskripsi"></textarea>
+                            <textarea rows="20" class="form-control" name="deskripsi"></textarea>
                           </div>
                     </div>
                     <div class="form-group">

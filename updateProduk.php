@@ -42,8 +42,12 @@ if (isset($updateProduk)) {
                          <label for="food_name">Nama Produk :</label>
                             <input type="text" class="form-control" id="food_name" value="<?php echo $getProduknfo->namaproduk; ?>" placeholder="Nama Produk" name="namaproduk" required>
                     </div>
-							 
-							 
+
+                    <div class="form-group">
+                        <label for="cost">No Wa Aktif :</label>
+                            <input type="number" class="form-control" id="cost"  placeholder="Harga" value="<?php echo $getProduknfo->notlp; ?>" name="notlp" required>
+                    </div>
+
                     <div class="form-group">
                         <label for="cost">Harga :</label>
                             <input type="number" class="form-control" id="cost"  placeholder="Harga" value="<?php echo $getProduknfo->harga; ?>" name="harga" required>

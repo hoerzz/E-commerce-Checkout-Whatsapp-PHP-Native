@@ -10,6 +10,7 @@ Session::CheckSession();
           </div>
           <div class="section-body">
         <div class="card-body pr-2 pl-2">
+        <div class="section-body">
         <?php
         $logMsg = Session::get('logMsg');
         if (isset($logMsg)) {
@@ -59,6 +60,93 @@ Session::CheckSession();
         $stmt = $db->pdo->query($sql);
         $countproduk = $stmt->fetchColumn();
         ?>
+        <h2 class="section-title">Hi, <?php echo $getUinfo->name; ?></h2>
+            <p class="section-lead">
+              Selamat Datang Di Zyrushshop
+            </p>
+                <div class="card profile-widget">
+                  <div class="profile-widget-header">
+                  <img src='<?php echo $getUinfo->fld_logo; ?>' class="rounded-circle profile-widget-picture" height="100" width="100" >
+                    <div class="profile-widget-items">
+                      <div class="profile-widget-item">
+                      <div class="profile-widget-item-label">Nama</div>
+                        <div class="profile-widget-item-value"><?php echo $getUinfo->name; ?></div>
+                      </div>
+                      <div class="profile-widget-item">
+                        <div class="profile-widget-item-label">Sebagai</div>
+                        <div class="profile-widget-item-value">
+                        <?php
+                          if ( $getUinfo->roleid == '1')  {
+                            echo "Admin";
+                          } else if ( $getUinfo->roleid == '2')  {
+                            echo "Vendor";
+                          } else if ( $getUinfo->roleid == '3')  {
+                            echo "User";
+                          } 
+                        ?>
+                        </div>
+                      </div>
+                      <div class="profile-widget-item">
+                        <div class="profile-widget-item-label">Nomer WhatsApp</div>
+                        <div class="profile-widget-item-value"><?php echo $getUinfo->mobile; ?></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="profile-widget-description">
+                    <div class="profile-widget-name"><?php echo $getUinfo->name; ?><div class="text-muted d-inline font-weight-normal"><div class="slash"></div> 
+                    
+                    <?php
+                    if ( $getUinfo->roleid == '1')  {
+                      echo "Admin";
+                    } else if ( $getUinfo->roleid == '2')  {
+                      echo "Vendor";
+                    } else if ( $getUinfo->roleid == '3')  {
+                      echo "User";
+                    } 
+                    ?>
+                    
+                    </div></div>
+                    <b>“Fokuslah menjadi produktif, bukan sekadar sibuk saja.”</b>
+                    <div class="mb-2 mt-3"><div class="text-small font-weight-bold">-Tim Ferris</div></div>
+                  </div>
+                </div>
+<?php if (Session::get('id') == TRUE) { ?>
+                  <?php if (Session::get('roleid') == '1') { ?>
+<div class="card">
+                  <div class="card-header">
+                    <h4>Pemberitahuan</h4>
+                  </div>
+                  <div class="card-body">
+                    <ul class="nav nav-tabs justify-content-center" id="myTab6" role="tablist">
+                      <li class="nav-item">
+                        <a class="nav-link active text-center" id="home-tab6" data-toggle="tab" href="#home6" role="tab" aria-controls="home" aria-selected="true">
+                          <span><i class="fas fa-home"></i></span> Dashboard</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link text-center" id="profile-tab6" data-toggle="tab" href="#profile6" role="tab" aria-controls="profile" aria-selected="false">
+                          <span><i class="fas fa-shopping-cart"></i></span> Jual Produk</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link text-center" id="contact-tab6" data-toggle="tab" href="#contact6" role="tab" aria-controls="contact" aria-selected="false">
+                          <span><i class="fas fa-plus"></i></span> Tambahan</a>
+                      </li>
+                    </ul>
+                    <div class="tab-content tab-bordered" id="myTabContent6">
+                      <div class="tab-pane fade show active" id="home6" role="tabpanel" aria-labelledby="home-tab6">
+                        Selamat Datang Di Zyrushshop
+                        Disini Anda Bisa Menjual Atau Membeli Product Yang Sudah Tersedia
+                        Kamu Bisa lihat list order kamu disini <a href="vieworder.php">Daftar Order</a>
+                        Dan Untuk Tambah Produk Bisa Disini <a href="addProduct.php">Tambah Produk</a>
+                      </div>
+                      <div class="tab-pane fade" id="profile6" role="tabpanel" aria-labelledby="profile-tab6">
+                        Harap Perhatikan Sebelum Menjual Produk Pastikan anda sudah setting Nomer Whatsapp Anda dengan benar dan gunakan Nomer Kode Negara Yang Benar Cth : 6285xxxx Ganti Nomer Whatsapp Kamu disini <a href="profile.php?id=<?php echo Session::get("id"); ?>">Profil</a>
+                      </div>
+                      <div class="tab-pane fade" id="contact6" role="tabpanel" aria-labelledby="contact-tab6">
+                        Sebelum Menjual Harap Tambahkan Kategori Terlebih Dahulu, Anda bisa Tambahkan disini <a href="addCategory.php">Tambah Kategori</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
           <div class="row">
           <div class="col-lg-4 col-md-4 col-sm-12">
               <div class="card card-statistic-2">
@@ -82,14 +170,7 @@ Session::CheckSession();
                 </div>
                 <div class="card-wrap">
                   <div class="card-header">
-                  <?php if (Session::get('id') == TRUE) { ?>
-                  <?php if (Session::get('roleid') == '1') { ?>
                     <h4> <a href="userlist.php">Total User In Database</a> </h4>
-                  <?php }} ?>
-                  <?php if (Session::get('id') == TRUE) { ?>
-                  <?php if (Session::get('roleid') == '2') { ?>
-                    <h4>Total User In Database</h4>
-                  <?php }} ?>
                   </div>
                   <div class="card-body">
                   <?php echo $countuser ?>
@@ -113,6 +194,48 @@ Session::CheckSession();
               </div>
             </div>
           </div>
+          <?php }} ?>
+          <?php if (Session::get('id') == TRUE) { ?>
+                  <?php if (Session::get('roleid') == '2') { ?>
+                    <div class="card">
+                  <div class="card-header">
+                    <h4>Pemberitahuan</h4>
+                  </div>
+                  <div class="card-body">
+                    <ul class="nav nav-tabs justify-content-center" id="myTab6" role="tablist">
+                      <li class="nav-item">
+                        <a class="nav-link active text-center" id="home-tab6" data-toggle="tab" href="#home6" role="tab" aria-controls="home" aria-selected="true">
+                          <span><i class="fas fa-home"></i></span> Dashboard</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link text-center" id="profile-tab6" data-toggle="tab" href="#profile6" role="tab" aria-controls="profile" aria-selected="false">
+                          <span><i class="fas fa-shopping-cart"></i></span> Jual Produk</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link text-center" id="contact-tab6" data-toggle="tab" href="#contact6" role="tab" aria-controls="contact" aria-selected="false">
+                          <span><i class="fas fa-plus"></i></span> Tambahan</a>
+                      </li>
+                    </ul>
+                    <div class="tab-content tab-bordered" id="myTabContent6">
+                      <div class="tab-pane fade show active" id="home6" role="tabpanel" aria-labelledby="home-tab6">
+                        Selamat Datang Di Zyrushshop
+                        Disini Anda Bisa Menjual Atau Membeli Product Yang Sudah Tersedia
+                        Kamu Bisa lihat list order kamu disini <a href="vieworder.php">Daftar Order</a>
+                        Dan Untuk Tambah Produk Bisa Disini <a href="addProduct.php">Tambah Produk</a>
+                      </div>
+                      <div class="tab-pane fade" id="profile6" role="tabpanel" aria-labelledby="profile-tab6">
+                        Harap Perhatikan Sebelum Menjual Produk Pastikan anda sudah setting Nomer Whatsapp Anda dengan benar dan gunakan Nomer Kode Negara Yang Benar Cth : 6285xxxx Ganti Nomer Whatsapp Kamu disini <a href="profile.php?id=<?php echo Session::get("id"); ?>">Profil</a>
+                      </div>
+                      <div class="tab-pane fade" id="contact6" role="tabpanel" aria-labelledby="contact-tab6">
+                        Sebelum Menjual Harap Tambahkan Kategori Terlebih Dahulu, Anda bisa Tambahkan disini <a href="addCategory.php">Tambah Kategori</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                    <?php }} ?>
+
+                
+
           <h2 id="produk" class="section-title">Data Produk</h2>
           <?php if (Session::get('id') == TRUE) { ?>
             <?php if (Session::get('roleid') == '1') { ?>
@@ -152,13 +275,17 @@ Session::CheckSession();
                         <td><?php echo '<img src=',$value->fldimage,' height="100" width="100" >'; ?></td>
                         <td><?php echo "Rp. ". number_format($value->harga); ?></td>
                         <td><?php echo $value->kategori; ?></td>
-                        <td><a class="btn btn-info btn-sm " href="productDetail.php?id=<?php echo $value->product_id;?>" target="_blank">View</a>
-                            <a class="btn btn-info btn-sm " href="updateProduk.php?id=<?php echo $value->product_id;?>">Update Produk</a>
-                            <a onclick="return confirm('Are you sure To Delete ?')" class="btn btn-danger
-                    <?php if (Session::get("product_id") == TRUE) {
-                      echo "disabled";
-                    } ?>
-                             btn-sm " href="?remove_produk=<?php echo $value->product_id;?>">Remove</a>
+                        <td>
+                            <div class="dropdown d-inline">
+                              <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Options
+                              </button>
+                              <div class="dropdown-menu">
+                                <a class="dropdown-item has-icon" href="productDetail.php?id=<?php echo $value->product_id;?>"><i class="fas fa-eye"></i> View</a>
+                                <a class="dropdown-item has-icon" href="updateProduk.php?id=<?php echo $value->product_id;?>"><i class="fas fa-edit"></i> Update</a>
+                                <a onclick="return confirm('Are you sure To Delete ?')" class="dropdown-item has-icon" href="?remove_produk=<?php echo $value->product_id;?>"><i class="fas fa-trash-alt"></i> Delete</a>
+                              </div>
+                            </div>
                         </td>
                       </tr>
                     <?php }}else{ ?>

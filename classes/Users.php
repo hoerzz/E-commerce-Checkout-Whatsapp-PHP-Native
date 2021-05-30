@@ -187,8 +187,10 @@ class Users{
           Session::set('roleid', $logResult->roleid);
           Session::set('email', $logResult->email);
           Session::set('name', $logResult->name);
+          Session::set('fld_logo', $logResult->fld_logo);
+          Session::set('mobile', $logResult->mobile);
           Session::set('logMsg', '');
-          echo "<script>location.href='dashboard.php';</script>";
+          echo "<script>location.href='index.php';</script>";
 
         }else{
           $msg = '<div class="alert alert-danger alert-dismissible mt-3" id="flash-msg">
@@ -484,8 +486,27 @@ class Users{
         }
     }
 
+    public function deleteCategoryById($remove_category){
+      $sql = "DELETE FROM kategori WHERE category_id  = :category_id  ";
+      $stmt = $this->db->pdo->prepare($sql);
+      $stmt->bindValue(':category_id', $remove_category);
+      $result =$stmt->execute();
+        if ($result) {
+          $msg = '<div class="alert alert-success alert-dismissible mt-3" id="flash-msg">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>Category !</strong> Berhasil Dihapus</div>';
+            return $msg;
+        }else{
+          $msg = '<div class="alert alert-danger alert-dismissible mt-3" id="flash-msg">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>Error !</strong> Data tidak Dihapus !</div>';
+            return $msg;
+        }
+    }
+
     public function UpdateProduct($product_id, $data){
       $namaproduk = $data['namaproduk'];
+      $notlp = $data['notlp'];
       $harga = $data['harga'];
       $deskripsi = $data['deskripsi'];
       $kategori = $data['kategori'];
@@ -504,6 +525,7 @@ class Users{
 
       $sql = "UPDATE tbl_produk SET
       namaproduk = :namaproduk,
+      notlp = :notlp,
       harga = :harga,
       deskripsi = :deskripsi,
       kategori = :kategori,
@@ -511,6 +533,7 @@ class Users{
       WHERE product_id = :product_id";
       $stmt = $this->db->pdo->prepare($sql);
       $stmt->bindValue(':namaproduk', $namaproduk);
+      $stmt->bindValue(':notlp', $notlp);
       $stmt->bindValue(':harga', ($harga));
       $stmt->bindValue(':deskripsi', $deskripsi);
       $stmt->bindValue(':kategori', $kategori);
@@ -586,7 +609,7 @@ class Users{
         }
     }
     public function selectAllKategori(){
-      $sql = "SELECT * FROM kategori ORDER BY id DESC";
+      $sql = "SELECT * FROM kategori ORDER BY category_id DESC";
       $stmt = $this->db->pdo->prepare($sql);
       $stmt->execute();
       return $stmt->fetchAll(PDO::FETCH_OBJ);
@@ -628,9 +651,10 @@ class Users{
       $npembeli = $data['npembeli'];
       $no_pembeli = $data['no_pembeli'];
       $alamat = $data['alamat'];
+      $total = $data['total'];
       $status = $data['status'];
 
-      $sql = "INSERT INTO tbl_order(penjual,nproduk,jumlah,npembeli,no_pembeli,alamat,status) VALUES (:penjual, :nproduk, :jumlah, :npembeli, :no_pembeli, :alamat, :status)";
+      $sql = "INSERT INTO tbl_order(penjual,nproduk,jumlah,npembeli,no_pembeli,alamat,total,status) VALUES (:penjual, :nproduk, :jumlah, :npembeli, :no_pembeli, :alamat, :total, :status)";
       $stmt = $this->db->pdo->prepare($sql);
       $stmt->bindValue(':penjual', $penjual);
       $stmt->bindValue(':nproduk', $nproduk);
@@ -638,6 +662,7 @@ class Users{
       $stmt->bindValue(':npembeli', ($npembeli));
       $stmt->bindValue(':no_pembeli', $no_pembeli);
       $stmt->bindValue(':alamat', $alamat);
+      $stmt->bindValue(':total', $total);
       $stmt->bindValue(':status', $status);
       $result = $stmt->execute();
       if ($result) {

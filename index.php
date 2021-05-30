@@ -14,6 +14,12 @@ spl_autoload_register(function($classes){
 
 $users = new Users();
 
+if (isset($_GET['action']) && $_GET['action'] == 'logout') {
+	// Session::set('logout', '<div class="alert alert-success alert-dismissible mt-3" id="flash-msg">
+	// <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+	// <strong>Success !</strong> You are Logged Out Successfully !</div>');
+	Session::destroy();
+  }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -56,21 +62,25 @@ $users = new Users();
 								<?php if (Session::get('id') == TRUE) { ?>
 									<?php if (Session::get('roleid') == '1') { ?>
 									<a href="#">
-										My Account
+										Data Akun Saya    
 										<i class="fa fa-angle-down"></i>
 									</a>
 									<ul class="account_selection">
-									<li><a href="dashboard.php"><i class="fa fa-sign-in" aria-hidden="true"></i>Dashboard</a></li>
+									<li><a href="dashboard.php"><i class="fa fa-tachometer" aria-hidden="true"></i>Dashboard</a></li>
+									<li><a href="vieworder.php"><i class="fa fa-history" aria-hidden="true"></i>Order History</a></li>
+									<li><a href="?action=logout"><i class="fa fa-sign-in" aria-hidden="true"></i>Logout</a></li>
 									<?php  } ?>
 									<?php } ?>
 								<?php if (Session::get('id') == TRUE) { ?>
 									<?php if (Session::get('roleid') == '2') { ?>
 										<a href="#">
-										My Account
+										Data Akun Saya
 										<i class="fa fa-angle-down"></i>
 									</a>
 									<ul class="account_selection">
-									<li><a href="dashboard.php"><i class="fa fa-sign-in" aria-hidden="true"></i>Dashboard</a></li>
+									<li><a href="dashboard.php"><i class="fa fa-tachometer" aria-hidden="true"></i>Dashboard</a></li>
+									<li><a href="vieworder.php"><i class="fa fa-history" aria-hidden="true"></i>Order History</a></li>
+									<li><a href="?action=logout"><i class="fa fa-sign-in" aria-hidden="true"></i>Logout</a></li>
 									<?php  } ?>
 								<?php } else {?>
 									<a href="#">
@@ -107,12 +117,12 @@ $users = new Users();
 							<ul class="navbar_user">
 							<?php if (Session::get('id') == TRUE) { ?>
 									<?php if (Session::get('roleid') == '1') { ?>
-									<li><a href="dashboard.php"><i class="fa fa-user" aria-hidden="true"></i></a></li>
+									<li><a href="dashboard.php"><i class="fa fa-tachometer" aria-hidden="true"></i></a></li>
 									<?php  } ?>
 									<?php } ?>
 								<?php if (Session::get('id') == TRUE) { ?>
 									<?php if (Session::get('roleid') == '2') { ?>
-									<li><a href="dashboard.php"><i class="fa fa-user" aria-hidden="true"></i></a></li>
+									<li><a href="dashboard.php"><i class="fa fa-tachometer" aria-hidden="true"></i></a></li>
 									<?php  } ?>
 								<?php }?>
 							</ul>
@@ -136,21 +146,25 @@ $users = new Users();
 				<?php if (Session::get('id') == TRUE) { ?>
 									<?php if (Session::get('roleid') == '1') { ?>
 									<a href="#">
-										My Account
+										Data Akun Saya
 										<i class="fa fa-angle-down"></i>
 									</a>
 									<ul class="menu_selection">
-									<li><a href="dashboard.php"><i class="fa fa-sign-in" aria-hidden="true"></i>Dashboard</a></li>
+									<li><a href="dashboard.php"><i class="fa fa-tachometer" aria-hidden="true"></i>Dashboard</a></li>
+									<li><a href="vieworder.php"><i class="fa fa-history" aria-hidden="true"></i>Order History</a></li>
+									<li><a href="?action=logout"><i class="fa fa-sign-in" aria-hidden="true"></i>Logout</a></li>
 									<?php  } ?>
 									<?php } ?>
 								<?php if (Session::get('id') == TRUE) { ?>
 									<?php if (Session::get('roleid') == '2') { ?>
 										<a href="#">
-										My Account
+										Data Akun Saya
 										<i class="fa fa-angle-down"></i>
 									</a>
 									<ul class="menu_selection">
-									<li><a href="dashboard.php"><i class="fa fa-sign-in" aria-hidden="true"></i>Dashboard</a></li>
+									<li><a href="dashboard.php"><i class="fa fa-tachometer" aria-hidden="true"></i>Dashboard</a></li>
+									<li><a href="vieworder.php"><i class="fa fa-history" aria-hidden="true"></i>Order History</a></li>
+									<li><a href="?action=logout"><i class="fa fa-sign-in" aria-hidden="true"></i>Logout</a></li>
 									<?php  } ?>
 								<?php } else {?>
 									<a href="#">

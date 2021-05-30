@@ -21,9 +21,10 @@ if (isset($_GET['id'])) {
                     <tr>
                       <th  class="text-center">No</th>
                       <th  class="text-center">Nama Penjual</th>
+                      <th  class="text-center">Nama Pembeli</th>
                       <th  class="text-center">Nama Produk</th>
                       <th  class="text-center">Jumlah</th>
-                      <th  class="text-center">Nama Pembeli</th>
+                      <th  class="text-center">Total</th>
                       <th  class="text-center">No Pembeli</th>
                       <th  class="text-center">Alamat</th>
                       <th  class="text-center">Status</th>
@@ -49,9 +50,10 @@ if (isset($_GET['id'])) {
                       >
                         <td><?php echo $i; ?></td>
                         <td><?php echo $value->penjual; ?></td>
+                        <td><?php echo $value->npembeli; ?></td>
                         <td><?php echo $value->nproduk; ?></td>
                         <td><?php echo $value->jumlah; ?></td>
-                        <td><?php echo $value->npembeli; ?></td>
+                        <td><?php echo $value->total; ?></td>
                         <td><?php echo $value->no_pembeli; ?></td>
                         <td><?php echo $value->alamat; ?></td>
                         <td><?php echo $value->status; ?></td>
@@ -81,6 +83,7 @@ if (isset($_GET['id'])) {
                       <th  class="text-center">No</th>
                       <th  class="text-center">Nama Produk</th>
                       <th  class="text-center">Jumlah</th>
+                      <th  class="text-center">Total</th>
                       <th  class="text-center">Nama Pembeli</th>
                       <th  class="text-center">No Pembeli</th>
                       <th  class="text-center">Alamat</th>
@@ -103,6 +106,7 @@ if (isset($_GET['id'])) {
                         <td><?php echo $no; ?></td>
                         <td><?php echo $data["nproduk"]; ?></td>
                         <td><?php echo $data["jumlah"]; ?></td>
+                        <td><?php echo $data["total"]; ?></td>
                         <td><?php echo $data["npembeli"]; ?></td>
                         <td><?php echo $data["no_pembeli"]; ?></td>
                         <td><?php echo $data["alamat"]; ?></td>

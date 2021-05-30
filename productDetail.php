@@ -55,6 +55,64 @@ if (isset($_GET['id'])) {
 <link rel="stylesheet" type="text/css" href="assets/Coloshop/styles/single_styles.css">
 <link rel="stylesheet" type="text/css" href="assets/Coloshop/styles/single_responsive.css">
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/8.5.0/css/intlTelInput.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/8.5.0/js/intlTelInput.js"></script>  
+    <script>
+      $(function () {
+      $("#phone").intlTelInput({
+            autoHideDialCode: true,
+            autoPlaceholder: true,
+            separateDialCode: true,
+            nationalMode: true,
+            geoIpLookup: function (callback) {
+                $.get("http://ipinfo.io", function () {}, "jsonp").always(function (resp) {
+                    var countryCode = (resp && resp.country) ? resp.country : "";
+                    callback(countryCode);
+                });
+            },
+            initialCountry: "auto",
+        });
+
+        // get the country data from the plugin
+        var countryData = $.fn.intlTelInput.getCountryData(),
+          telInput = $("#phone"),
+          addressDropdown = $("#listcountry");
+
+        // init plugin
+        telInput.intlTelInput({
+          utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/8.5.0/js/utils.js" // just for formatting/placeholders etc
+        });
+
+        // populate the country dropdown
+        $.each(countryData, function(i, country) {
+          addressDropdown.append($("<option></option>").attr("value", country.iso2).text(country.name));
+        });
+
+        // listen to the telephone input for changes
+        telInput.on("countrychange", function() {
+          var countryCode = telInput.intlTelInput("getSelectedCountryData").iso2;
+          addressDropdown.val(countryCode);
+        });
+
+        // trigger a fake "change" event now, to trigger an initial sync
+        telInput.trigger("countrychange");
+
+        // listen to the address dropdown for changes
+        addressDropdown.change(function() {
+          var countryCode = $(this).val();
+          telInput.intlTelInput("setCountry", countryCode);
+        });
+
+        // update the hidden input on submit
+        $("form").submit(countryData,function(i, country) {
+          $("#country").val(telInput.intlTelInput("getSelectedCountryData").name);
+          $("#phonefull").val('+' + telInput.intlTelInput("getSelectedCountryData").dialCode + $("#phone").val());      
+        });
+
+      });
+    </script>
+
 </head>
 
 <body>
@@ -82,21 +140,25 @@ if (isset($_GET['id'])) {
 								<?php if (Session::get('id') == TRUE) { ?>
 									<?php if (Session::get('roleid') == '1') { ?>
 									<a href="#">
-										My Account
+										Data Akun Saya    
 										<i class="fa fa-angle-down"></i>
 									</a>
 									<ul class="account_selection">
-									<li><a href="dashboard.php"><i class="fa fa-sign-in" aria-hidden="true"></i>Dashboard</a></li>
+									<li><a href="dashboard.php"><i class="fa fa-tachometer" aria-hidden="true"></i>Dashboard</a></li>
+									<li><a href="vieworder.php"><i class="fa fa-history" aria-hidden="true"></i>Order History</a></li>
+									<li><a href="?action=logout"><i class="fa fa-sign-in" aria-hidden="true"></i>Logout</a></li>
 									<?php  } ?>
 									<?php } ?>
 								<?php if (Session::get('id') == TRUE) { ?>
 									<?php if (Session::get('roleid') == '2') { ?>
 										<a href="#">
-										My Account
+										Data Akun Saya
 										<i class="fa fa-angle-down"></i>
 									</a>
 									<ul class="account_selection">
-									<li><a href="dashboard.php"><i class="fa fa-sign-in" aria-hidden="true"></i>Dashboard</a></li>
+									<li><a href="dashboard.php"><i class="fa fa-tachometer" aria-hidden="true"></i>Dashboard</a></li>
+									<li><a href="vieworder.php"><i class="fa fa-history" aria-hidden="true"></i>Order History</a></li>
+									<li><a href="?action=logout"><i class="fa fa-sign-in" aria-hidden="true"></i>Logout</a></li>
 									<?php  } ?>
 								<?php } else {?>
 									<a href="#">
@@ -132,12 +194,12 @@ if (isset($_GET['id'])) {
 							<ul class="navbar_user">
 							<?php if (Session::get('id') == TRUE) { ?>
 									<?php if (Session::get('roleid') == '1') { ?>
-									<li><a href="dashboard.php"><i class="fa fa-user" aria-hidden="true"></i></a></li>
+									<li><a href="dashboard.php"><i class="fa fa-tachometer" aria-hidden="true"></i></a></li>
 									<?php  } ?>
 									<?php } ?>
 								<?php if (Session::get('id') == TRUE) { ?>
 									<?php if (Session::get('roleid') == '2') { ?>
-									<li><a href="dashboard.php"><i class="fa fa-user" aria-hidden="true"></i></a></li>
+									<li><a href="dashboard.php"><i class="fa fa-tachometer" aria-hidden="true"></i></a></li>
 									<?php  } ?>
 								<?php }?>
 							</ul>
@@ -237,7 +299,7 @@ if (isset($_GET['id'])) {
 					<div class="product_price">Rp. <?php echo number_format($getProduknfo->harga); ?></div>
 					<div class="quantity d-flex flex-column flex-sm-row align-items-sm-center">
 					<span>Penjual : <b><?php echo $getProduknfo->penjual; ?></b></span>
-						<button type="button" class="red_button add_to_cart_button" data-toggle="modal" data-target="#exampleModal">Beli Sekarang</button>
+						<button type="button" class="red_button add_to_cart_button" data-toggle="modal" data-target=".bd-example-modal-lg">Beli Sekarang</button>
 						<!-- <div class="product_favorite d-flex flex-column align-items-center justify-content-center"></div> -->
 					</div>
 				</div>
@@ -249,8 +311,8 @@ if (isset($_GET['id'])) {
 
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Detail Pemesanan</h5>
@@ -268,9 +330,37 @@ if (isset($_GET['id'])) {
               }
       ?>
       <div class="modal-body">
+
+	  <div class="row">
+			<div class="col-lg-7">
+				<div class="single_product_pics">
+					<div class="row">
+						<div class="col-lg-9 image_col">
+							<div class="single_product_image">
+								<div class="single_product_image_background" style="background-image:url(<?php echo $getProduknfo->fldimage; ?>)"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+            
+			<div class="col-lg-5">
+				<div class="product_details">
+					<div class="product_details_title">
+						<h2><?php echo $getProduknfo->namaproduk; ?></h2>
+						<p><?php echo substr($getProduknfo->deskripsi,0,300); ?>...</p>
+					</div>
+                    <br>
+					<div class="product_price">Rp. <?php echo number_format($getProduknfo->harga); ?></div>
+				</div>
+			</div>
+		</div>
+
+		<br><br>
+
 	  				<form action="" method="post" enctype="multipart/form-data">
 						<div>
-							<input type="hidden" name="penjual" value="<?php $getUinfo = $users->getUserInfoById(Session::get("id")); if ($getUinfo) { echo $getUinfo->name; }?>" class="form-control">
+							<input type="hidden" name="penjual" value="<?php echo $getProduknfo->penjual; ?>" class="form-control">
 
 							<input type="hidden" name="nproduk" value="<?php echo $getProduknfo->namaproduk; ?>" class="form-control">
 
@@ -282,14 +372,17 @@ if (isset($_GET['id'])) {
 							<input name="jumlah" id="jumlah" class="form_input input_email input_ph" type="number" placeholder="Jumlah Beli" required="required" data-error="Valid email is required.">
 							
 							<textarea name="alamat" id='wa_textarea' class="form_input input_name input_ph" placeholder='Alamat Lengkap' row='1' required=""></textarea>
+							
+							<input type="hidden" id="totalsemua" name="total" class="form-control">
 
 							<input type="hidden" name="status" value="Proses" class="form-control">
 							</div>
-							<input name="add" id="send_form" class="btn btn-success" href="javascript:void" type="submit" title="Beli Lewat Whatsap" value="Beli Lewat Whatsapp"></input>
+							<br><br>
+							<input name="add" id="send_form" class="red_button message_submit_btn trans_300" href="javascript:void" type="submit" title="Beli Lewat Whatsap" value="Beli Lewat Whatsapp"></input>
 					</form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        ZYRUSHSHOP
       </div>
     </div>
   </div>
@@ -464,11 +557,12 @@ var walink = 'https://web.whatsapp.com/send',
 	nproduct = '<?php echo $getProduknfo->namaproduk; ?>',
 	harga = '<?php echo $getProduknfo->harga; ?>',
 	jumlah = document.getElementById("jumlah").value,
-    walink2 = 'Halo saya ingin ',
+    walink2 = 'Halo saya ingin membeli',
     text_yes = 'Terkirim.',
 	text_no = 'Isi semua Formulir lalu klik Send.';
 	hasil = harga * jumlah;
-	var subtotal = hasil.toLocaleString();
+	var subtotal = 'Rp. ' + hasil.toLocaleString();
+	document.getElementById("totalsemua").value = subtotal;
 	var hargaori = "<?php echo number_format($getProduknfo->harga,2,",","."); ?>";
 
 /* Smartphone Support */
@@ -488,16 +582,16 @@ var contact_whatsapp = walink + '?phone=' + phone + '&text=' + walink2 + '%0A%0A
 	'=============='+ '%0A' +
     'Detail Pemesanan'+ '%0A' +
     '=============='+ '%0A' +
-	'*Nama Produk* : ' + nproduct + '%0A' +
-	'*Harga* : Rp. ' + hargaori + '%0A' +
-	'*Jumlah* : ' + jumlah + '%0A' +
-	'*Total* : Rp. ' + subtotal + '%0A' +
+	'|| *Nama Produk* : ' + nproduct + '%0A' +
+	'|| *Harga* : Rp. ' + hargaori + '%0A' +
+	'|| *Jumlah* : ' + jumlah + '%0A' +
+	'|| *Total* : ' + subtotal + '%0A' +
 	'==============='+ '%0A' +
     'Detail Customer'+ '%0A' +
     '==============='+ '%0A' +
-    '*Name* : ' + input_name1 + '%0A' +
-    '*Email Address* : ' + input_email1 + '%0A' +
-    '*Alamat* : ' + input_textarea1 + '%0A';
+    '|| *Name* : ' + input_name1 + '%0A' +
+    '|| *Email Address* : ' + input_email1 + '%0A' +
+    '|| *Alamat* : ' + input_textarea1 + '%0A';
 
 /* Whatsapp Window Open */
 window.open(contact_whatsapp,'_blank');

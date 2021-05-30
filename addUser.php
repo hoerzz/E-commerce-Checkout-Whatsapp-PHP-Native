@@ -4,6 +4,8 @@ Session::CheckSession();
 ?>
 
 <div class="main-content">
+<?php if (Session::get('id') == TRUE) { ?>
+            <?php if (Session::get('roleid') == '1') { ?>
         <section class="section">
           <div class="section-header">
           <h3><i class="fas fa-users mr-2"></i>Add User </h3>
@@ -11,8 +13,6 @@ Session::CheckSession();
           <div class="section-body">
               <div class="card-body">
 			         <!--add dish-->
-               <?php if (Session::get('id') == TRUE) { ?>
-            <?php if (Session::get('roleid') == '1') { ?>
             <?php 
             if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['register'])) {
 
@@ -63,8 +63,26 @@ Session::CheckSession();
 				   
                 </div>
                 
-                <?php }} else { 
-                  header('Location:dashboard.php'); } ?>
+                <?php }} ?>
+                <?php if (Session::get('id') == TRUE) { ?>
+                <?php if (Session::get('roleid') == '2') { ?>
+                  <div class="card">
+                  <div class="card-header">
+                    <h4>Not Found</h4>
+                  </div>
+                  <div class="card-body">
+                    <div class="empty-state" data-height="600">
+                      <img class="img-fluid" src="assets/img/drawkit/drawkit-nature-man-colour.svg" alt="image">
+                      <h2 class="mt-0">Looks like you got lost</h2>
+                      <p class="lead">
+                        We can't find the path you're looking for, check the path again and try again.
+                      </p>
+                      <a href="dashboard.php" class="btn btn-warning mt-4">Dashboard</a>
+                      <a href="index.php" class="mt-4 bb">Home</a>
+                    </div>
+                  </div>
+                </div>
+                  <?php }} ?>
                 
 </div>
 </div></div></div></section>

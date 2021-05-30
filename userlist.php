@@ -4,6 +4,8 @@ include 'inc/header.php';
 Session::CheckSession();
 ?>
  <div class="main-content">
+ <?php if (Session::get('id') == TRUE) { ?>
+            <?php if (Session::get('roleid') == '1') { ?>
         <section class="section">
           <div class="section-header">
           <h3><i class="fas fa-users mr-2"></i>User list </h3>
@@ -46,8 +48,6 @@ if (isset($activeId)) {
   echo $activeId;
 }
         ?>
-        <?php if (Session::get('id') == TRUE) { ?>
-            <?php if (Session::get('roleid') == '1') { ?>
               <div style="overflow-x:auto;">
           <table id="example" class="table table-striped table-bordered" style="width:100%">
                   <thead>
@@ -168,15 +168,26 @@ if (isset($activeId)) {
 
               </table>
               </div>
-              <?php  } ?>
-              <?php } else { 
-                  echo '<div class="alert alert-danger alert-has-icon">
-                      <div class="alert-icon"><i class="far fa-lightbulb"></i></div>
-                      <div class="alert-body">
-                        <div class="alert-title">Perhatian</div>
-                        
-                      </div>
-                    </div>'; } ?>
+              <?php  }} ?>
+              <?php if (Session::get('id') == TRUE) { ?>
+                <?php if (Session::get('roleid') == '2') { ?>
+                  <div class="card">
+                  <div class="card-header">
+                    <h4>Not Found</h4>
+                  </div>
+                  <div class="card-body">
+                    <div class="empty-state" data-height="600">
+                      <img class="img-fluid" src="assets/img/drawkit/drawkit-nature-man-colour.svg" alt="image">
+                      <h2 class="mt-0">Looks like you got lost</h2>
+                      <p class="lead">
+                        We can't find the path you're looking for, check the path again and try again.
+                      </p>
+                      <a href="dashboard.php" class="btn btn-warning mt-4">Dashboard</a>
+                      <a href="index.php" class="mt-4 bb">Home</a>
+                    </div>
+                  </div>
+                </div>
+                  <?php }} ?>
 
 
 
