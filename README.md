@@ -9,4 +9,4 @@ Email : user@gmail.com<br>
 password : user123<br>
 <br>
 Ganti Nama Database<br>
-Config/config.php<br>
+config/config.php<br>
